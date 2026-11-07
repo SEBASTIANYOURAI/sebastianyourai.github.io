@@ -920,7 +920,7 @@ footer .sp{flex-grow:1}
   const LIMIT = 100;
   // REAL_SALES (7 Nov): the button opens Polar's own secure checkout on top of this page. SALES_LIVE stays false until
   // the owner has bought through it himself; until then only the private test address (?founder-test) shows the button.
-  const CHECKOUT_URL = "__CHECKOUT_URL__";
+  const CHECKOUT_URL = "https://buy.polar.sh/polar_cl_GE4I5Fad6rOFpcm993sFqeNBkO9t2r3Fq4ReW1IHSFu";
   const SALES_LIVE = false;
   const TEST = (() => { const q = /[?&]founder-test\b/.test(location.search); try { if (q) sessionStorage.setItem("seb-founder-test", "1"); return q || sessionStorage.getItem("seb-founder-test") === "1"; } catch (e) { return q; } })();
   const SALES_OPEN = /^https:\/\/buy\.polar\.sh\//.test(CHECKOUT_URL) && (SALES_LIVE || TEST);
