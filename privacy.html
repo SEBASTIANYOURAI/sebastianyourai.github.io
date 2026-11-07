@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy · Sebastian</title>
+<link rel="icon" type="image/png" href="assets/logo.png">
+<meta name="theme-color" content="#09090a">
+<style>
+@font-face{font-family:Corm;font-weight:600;font-display:swap;src:url(assets/fonts/cormorant-garamond-latin-600-normal.woff2) format('woff2')}
+@font-face{font-family:Corm;font-style:italic;font-weight:500;font-display:swap;src:url(assets/fonts/cormorant-garamond-latin-500-italic.woff2) format('woff2')}
+@font-face{font-family:Inter;font-weight:400;font-display:swap;src:url(assets/fonts/inter-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:Inter;font-weight:600;font-display:swap;src:url(assets/fonts/inter-latin-600-normal.woff2) format('woff2')}
+:root{--acc:#e2bd85;--ink:#f2efe8;--body:#cfcfcc;--mute:#8f8b83;color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0;background:#09090a;color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+header{display:flex;align-items:center;gap:12px;padding:20px max(20px,env(safe-area-inset-left,0px));border-bottom:1px solid rgba(255,255,255,.07)}
+header a{display:flex;align-items:center;gap:12px;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--mute);text-decoration:none}
+header img{width:28px;height:28px;border-radius:7px}
+main{max-width:760px;margin:0 auto;padding:48px 20px 80px}
+.kick{font-size:12px;letter-spacing:.35em;text-transform:uppercase;color:var(--acc)}
+h1{font:600 clamp(34px,6vw,48px)/1.1 Corm,serif;margin:14px 0 8px}
+.date{color:var(--mute);font-size:13px;margin:0 0 30px}
+.lead{font:italic 500 clamp(20px,3vw,24px)/1.45 Corm,serif;color:#e9e4da;margin:0 0 26px}
+h2{font:600 26px/1.2 Corm,serif;color:var(--ink);margin:38px 0 10px}
+p,li{font-size:15.5px;line-height:1.7;color:var(--body)}
+ul{padding-left:20px}
+a{color:var(--acc)}
+b{color:var(--ink);font-weight:600}
+.box{border:1px solid rgba(var(--acc-rgb,226,189,133),.35);border-radius:12px;padding:16px 20px;background:rgba(255,255,255,.02);margin:20px 0}
+footer{border-top:1px solid rgba(255,255,255,.07);padding:26px 20px;display:flex;gap:18px;flex-wrap:wrap;justify-content:center;font-size:13px;color:var(--mute)}
+footer a{color:#a9a59c;text-decoration:none}footer a:hover{color:var(--acc)}
+</style>
+</head>
+<body>
+<header><a href="./"><img src="assets/logo.png" alt="">Sebastian</a></header>
+<main>
+<div class="kick">Privacy</div>
+<h1>What I keep, and what leaves your PC.</h1>
+<p class="date">Last updated 7 November 2026</p>
+<p class="lead">“My memory of us lives on your PC, not on anyone's server.” Here is exactly what that means.</p>
+<p>Sebastian is made and sold by Leonard Haasbroek, Fargo, North Dakota, USA. Questions about privacy: <a href="mailto:sebastianyouraibutler@gmail.com">sebastianyouraibutler@gmail.com</a>.</p>
+
+<h2>On your PC</h2>
+<p>Your conversations, his memory of you, your settings, your keys and the sound of your voice (which he uses to notice when someone else is in the room) are stored in his folder on your own computer. We never receive them. Uninstalling him without keeping his memory deletes them.</p>
+
+<h2>What leaves your PC, and why</h2>
+<ul>
+<li><b>The brain you choose.</b> To think, Sebastian sends what you're talking about (and any picture or file you show him) to the AI provider you picked in Settings, using your own key: for example Anthropic (Claude) or OpenAI. That provider's own privacy terms apply. If you choose a local brain, this goes nowhere.</li>
+<li><b>Looking things up.</b> When he researches, reads the news or checks the weather, he sends your search words to search, news and weather services (for example DuckDuckGo, news sites, GDELT, archive.org, Open-Meteo and the US Weather Service), and fetches the pages himself. In Tor mode this goes through the Tor network instead.</li>
+<li><b>Holograms.</b> When you ask for a 3D model, he searches public model libraries (for example Sketchfab and NASA), or, if you ask him to make a new one, sends your description or picture to the 3D service you set up.</li>
+<li><b>Updates.</b> He checks GitHub for new signed versions of himself. GitHub sees your internet address, as with any download.</li>
+<li><b>Your founder key.</b> When Sebastian is installed, and at most once a day after that, he checks your key with Polar, our shop. He sends the key, a random activation number, and a one-way fingerprint of your PC that can't be turned back into anything about you. No PC name, no files, no conversations.</li>
+<li><b>Fault reports.</b> If something breaks, he writes a short report for you. It only goes anywhere if you read it and send it yourself.</li>
+</ul>
+
+<h2>When you buy</h2>
+<p>Payment is handled by <a href="https://polar.sh" rel="noopener">Polar</a>, which sells Sebastian on our behalf as the merchant of record and handles tax and receipts. Polar collects your payment details; we never see your card. We receive your name, email address, country and order details from Polar so we can send your key, answer your questions and handle refunds. We don't sell or share them with anyone else, and we only email you about your purchase, your updates, or if you ask us something.</p>
+
+<h2>This website</h2>
+<p>This site uses no cookies, no analytics and no advertising trackers. It remembers two small things in your own browser only: the colour you picked for Sebastian, and whether you've already seen the opening. The site is hosted by GitHub Pages, and the 3D room loads a code library from cdnjs (Cloudflare). Like any website host, they see your internet address when the page loads.</p>
+
+<h2>Children</h2>
+<p>Sebastian is not made for children under 13, and we don't knowingly collect anything from them.</p>
+
+<h2>Your choices</h2>
+<p>You can delete everything on your PC by uninstalling Sebastian. To see or delete what we hold about your purchase, email <a href="mailto:sebastianyouraibutler@gmail.com">sebastianyouraibutler@gmail.com</a>. Records Polar must keep for tax reasons stay with Polar.</p>
+<p>If this page changes, the date at the top changes too.</p>
+</main>
+<footer><a href="./">Home</a><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a><a href="refunds.html">Refunds</a><a href="mailto:sebastianyouraibutler@gmail.com">sebastianyouraibutler@gmail.com</a><span>© 2026 Leonard Haasbroek</span></footer>
+</body>
+</html>
