@@ -310,6 +310,8 @@ section{scroll-margin-top:64px}
 .preview-tag{position:fixed;top:14px;left:50%;transform:translateX(-50%);font:600 10.5px Inter,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:#1a140a;background:#e2bd85;padding:5px 12px;border-radius:999px;z-index:71}
 #buyClose{position:fixed;top:12px;right:14px;z-index:71}
 @media(max-width:560px){.preview-tag{left:14px;transform:none;letter-spacing:.14em}}
+.howto{margin:4px 0 0;padding-left:22px;text-align:left;display:flex;flex-direction:column;gap:8px;font-size:14.5px;line-height:1.55;color:var(--body);max-width:480px}
+.howto b{color:var(--ink)}
 .demo{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:6px}
 .demo .pill{height:28px;font-size:11px}
 
@@ -692,23 +694,24 @@ footer .sp{flex-grow:1}
 </div></footer>
 
 <div id="buy" role="dialog" aria-modal="true" aria-label="Bring Sebastian home">
-  <div class="preview-tag">Preview · no real payment</div>
   <button class="pill" id="buyClose" type="button">Close</button>
   <div class="box">
     <div class="name">SEBASTIAN</div><div class="rule"></div>
-    <div class="stage" id="bPay">
-      <p class="big">Founder <span id="bNum">#1</span> of 100</p>
-      <p class="lead">$49, once. Every 1.x update. 14 days to change your mind.</p>
-      <div class="paybox"><b>Lemon Squeezy's secure payment opens right here</b>, on top of this page: card or PayPal, tax and receipt handled by them. You never leave the site.<br><br>In this preview nothing is charged.</div>
-      <div class="row"><button class="btn acc" id="bPaid" type="button">Pretend I've paid</button><button class="btn ghost" id="bNot" type="button">Not now</button></div>
+    <div class="stage" id="bOpen">
+      <p class="q">“Very good. Let's bring me home.”</p>
+      <p class="lead" id="bOpenMsg">Opening the secure payment…</p>
     </div>
     <div class="stage" id="bThanks">
-      <p class="big">You're founder <span id="bNum2">#1</span>.</p>
-      <p class="st" id="bLeft">99 places left.</p>
-      <p class="lead">Your founder key (we email it to you too):</p>
-      <div class="keybox"><input id="bKeyShow" readonly aria-label="Your founder key"></div>
-      <button class="btn acc" id="bDl" type="button"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 4v12m0 0l-5-5m5 5l5-5M5 20h14"/></svg>Download Sebastian Setup</button>
-      <p class="small" style="font-size:12px;color:var(--mute)">A small download. Open it and I'll take it from there.</p>
+      <p class="big">“Welcome home, founder.”</p>
+      <p class="st">I'll always remember you were one of the first.</p>
+      <p class="lead">Your founder key is on Polar's receipt you just saw, and in the email Polar sent you.</p>
+      <a class="btn acc" id="bDl" href="https://github.com/SEBASTIANYOURAI/sebastianyourai.github.io/releases/latest/download/Sebastian.Setup.exe"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 4v12m0 0l-5-5m5 5l5-5M5 20h14"/></svg>Download Sebastian Setup</a>
+      <ol class="howto">
+        <li><b>Open Sebastian Setup</b> once it has downloaded (about 110 MB).</li>
+        <li>If Windows says <b>“Windows protected your PC”</b>, click <b>More info</b>, then <b>Run anyway</b>.</li>
+        <li>Paste your <b>founder key</b> when I ask. I'll download the rest of myself (about 4 GB) and move in.</li>
+      </ol>
+      <p class="small" style="font-size:12px;color:var(--mute)">Lost your key? It's in your Polar email, or write to <a href="mailto:sebastianyouraibutler@gmail.com">sebastianyouraibutler@gmail.com</a>.</p>
     </div>
     <div class="stage" id="bKey">
       <p class="st">“May I see your founder key?”</p>
@@ -728,7 +731,6 @@ footer .sp{flex-grow:1}
       <p class="lead">Next, he says hello and asks how you'd like him to address you.</p>
       <button class="btn line" id="bDone" type="button">Close the preview</button>
     </div>
-    <div class="demo" hidden><span class="small" style="font-size:11px;color:#5f5c56;align-self:center">Preview controls:</span><button class="pill" id="dm37" type="button">Pretend 37 are sold</button><button class="pill" id="dm99" type="button">Pretend 99 are sold</button><button class="pill" id="dm0" type="button">Reset to 0</button></div>
   </div>
 </div>
 
@@ -916,7 +918,12 @@ footer .sp{flex-grow:1}
   // --- the founder edition: 100 places. The real count will come from the shop (a small Cloudflare Worker asks
   //     Lemon Squeezy); until then this preview keeps its own pretend count on this device.
   const LIMIT = 100;
-  const SALES_OPEN = false;   // flips to true once the download is ready and the real Polar checkout is wired in
+  // REAL_SALES (7 Nov): the button opens Polar's own secure checkout on top of this page. SALES_LIVE stays false until
+  // the owner has bought through it himself; until then only the private test address (?founder-test) shows the button.
+  const CHECKOUT_URL = "__CHECKOUT_URL__";
+  const SALES_LIVE = false;
+  const TEST = (() => { const q = /[?&]founder-test\b/.test(location.search); try { if (q) sessionStorage.setItem("seb-founder-test", "1"); return q || sessionStorage.getItem("seb-founder-test") === "1"; } catch (e) { return q; } })();
+  const SALES_OPEN = /^https:\/\/buy\.polar\.sh\//.test(CHECKOUT_URL) && (SALES_LIVE || TEST);
   let sold = 0;
   function showCount() {
     const left = Math.max(0, LIMIT - sold), full = left === 0;
@@ -941,27 +948,40 @@ footer .sp{flex-grow:1}
   const sayP = (t, min) => new Promise((res) => { const st = Date.now(); say(t, () => { const w = Math.max(0, (min || 1300) - (Date.now() - st)); setTimeout(res, w); }); });
   let flow = 0, myNum = 1, myKey = "";
   function stage(id) { $$("#buy .stage").forEach((e) => e.classList.toggle("on", e.id === id)); }
-  function openBuy() {
+  let polarLoad = null;
+  function loadPolar() {
+    if (window.Polar && window.Polar.EmbedCheckout) return Promise.resolve();
+    if (!polarLoad) polarLoad = new Promise((ok, no) => {
+      const sc = document.createElement("script"); sc.src = "https://cdn.jsdelivr.net/npm/@polar-sh/checkout@0.4.3/dist/embed.global.js";
+      sc.onload = () => ok(); sc.onerror = () => { polarLoad = null; no(new Error("load")); }; document.head.appendChild(sc);
+    });
+    return polarLoad;
+  }
+  async function openBuy() {
     if (!SALES_OPEN || sold >= LIMIT) return;
     if (touring) endTour();
-    buying = true; flow++; setSound(true);
-    myNum = sold + 1; $("#bNum").textContent = "#" + myNum;
-    $("#buy").classList.add("on"); document.body.style.overflow = "hidden"; stage("bPay");
-    ["f_thanks", "f_key", "f_keyok", "f_look0", "f_look1", "f_look2", "f_look3", "f_move0", "f_move1", "f_move3", "f_move6", "f_move7", "f_move8", "f_move9", "f_home"].forEach(preload);
-    say("f_open");
+    buying = true; flow++; const f = flow; setSound(true);
+    $("#buy").classList.add("on"); document.body.style.overflow = "hidden"; stage("bOpen");
+    $("#bOpenMsg").textContent = "Opening the secure payment…";
+    preload("f_thanks"); say("f_open");
+    const slow = setTimeout(() => { if (f === flow) $("#bOpenMsg").innerHTML = 'The payment is taking a while to open. If nothing appears, close this and try again, or email <a href="mailto:sebastianyouraibutler@gmail.com">sebastianyouraibutler@gmail.com</a>.'; }, 15000);
+    try {
+      await loadPolar();
+      const co = await window.Polar.EmbedCheckout.create(CHECKOUT_URL, { theme: "dark" });
+      clearTimeout(slow); let paid = false;
+      if (f === flow) $("#bOpenMsg").textContent = "Your payment is open. Polar, our shop, handles the card and the receipt.";
+      // stay on Polar's own receipt after paying: it shows the founder key with a Copy button
+      co.addEventListener("success", (e) => { paid = true; e.preventDefault(); });
+      co.addEventListener("close", () => { if (f !== flow) return; if (paid) { stage("bThanks"); say("f_thanks"); } else closeBuy(); });
+    } catch (e) {
+      clearTimeout(slow);
+      if (f === flow) $("#bOpenMsg").innerHTML = 'The payment window couldn\'t open just now. Please try again in a moment, or email <a href="mailto:sebastianyouraibutler@gmail.com">sebastianyouraibutler@gmail.com</a>.';
+    }
   }
   function closeBuy() { flow++; buying = false; hush(); $("#buy").classList.remove("on"); document.body.style.overflow = ""; }
   ["f_open"].forEach(preload);
   $("#buyBtn").onclick = openBuy;
-  $("#buyClose").onclick = closeBuy; $("#bNot").onclick = closeBuy; $("#bDone").onclick = closeBuy;
-  $("#bPaid").onclick = () => {
-    setSold(sold + 1);
-    myKey = "SEB-F" + String(myNum).padStart(3, "0") + "-" + Math.random().toString(36).slice(2, 6).toUpperCase() + "-PREVIEW";
-    $("#bNum2").textContent = "#" + myNum; $("#bKeyShow").value = myKey;
-    const left = LIMIT - sold; $("#bLeft").textContent = left === 0 ? "You were the last one. Every place is taken." : left + (left === 1 ? " place left." : " places left.");
-    stage("bThanks"); say("f_thanks");
-  };
-  $("#bDl").onclick = () => { stage("bKey"); $("#bKeyIn").value = ""; $("#bKeyMsg").textContent = "Paste the key from your email. (In this preview: " + myKey + ")"; say("f_key"); setTimeout(() => $("#bKeyIn").focus(), 50); };
+  $("#buyClose").onclick = closeBuy; $("#bDone").onclick = closeBuy;
   $("#bKeyIn").addEventListener("keydown", (e) => { if (e.key === "Enter") $("#bKeyGo").click(); });
   $("#bKeyGo").onclick = async () => {
     const v = $("#bKeyIn").value.trim().toUpperCase();
@@ -981,9 +1001,6 @@ footer .sp{flex-grow:1}
     }
     stage("bHome"); say("f_home");
   };
-  $("#dm37").onclick = () => { setSold(37); closeBuy(); };
-  $("#dm99").onclick = () => { setSold(99); closeBuy(); };
-  $("#dm0").onclick = () => { setSold(0); closeBuy(); };
   window.addEventListener("keydown", (e) => { if (e.key === "Escape" && buying) closeBuy(); });
 
   // --- top bar
