@@ -1,0 +1,1160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sebastian</title>
+<meta name="description" content="Sebastian is an AI butler who lives on your own Windows PC, in his own rooms, with his own voice and a memory of every word you've said. He shows you around himself.">
+<link rel="icon" type="image/png" href="assets/logo.png">
+<link rel="canonical" href="https://sebastianyourai.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Sebastian">
+<meta property="og:title" content="Sebastian: a private AI butler who lives on your PC">
+<meta property="og:description" content="Not in a chat box. In his own rooms, with his own voice, and a memory of every word you've said. He'll show you around himself.">
+<meta property="og:url" content="https://sebastianyourai.github.io/">
+<meta property="og:image" content="https://sebastianyourai.github.io/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Sebastian in a black suit in his lounge above the city at night">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sebastian: a private AI butler who lives on your PC">
+<meta name="twitter:description" content="Not in a chat box. In his own rooms, with his own voice, and a memory of every word you've said.">
+<meta name="twitter:image" content="https://sebastianyourai.github.io/assets/og.jpg">
+<meta name="theme-color" content="#09090a">
+<style>
+/* Sebastian shows you around himself, like the tour inside his program: black smoked-glass panels, his colour (the
+   visitor can change it, like his setup), the hologram parts in ice blue like his real stage, and his own voice. */
+@font-face{font-family:Corm;font-style:normal;font-weight:500;font-display:swap;src:url(assets/fonts/cormorant-garamond-latin-500-normal.woff2) format('woff2')}
+@font-face{font-family:Corm;font-style:normal;font-weight:600;font-display:swap;src:url(assets/fonts/cormorant-garamond-latin-600-normal.woff2) format('woff2')}
+@font-face{font-family:Corm;font-style:italic;font-weight:500;font-display:swap;src:url(assets/fonts/cormorant-garamond-latin-500-italic.woff2) format('woff2')}
+@font-face{font-family:Corm;font-style:italic;font-weight:600;font-display:swap;src:url(assets/fonts/cormorant-garamond-latin-600-italic.woff2) format('woff2')}
+@font-face{font-family:Inter;font-weight:400;font-display:swap;src:url(assets/fonts/inter-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:Inter;font-weight:500;font-display:swap;src:url(assets/fonts/inter-latin-500-normal.woff2) format('woff2')}
+@font-face{font-family:Inter;font-weight:600;font-display:swap;src:url(assets/fonts/inter-latin-600-normal.woff2) format('woff2')}
+:root{
+  --acc:#e2bd85;--acc-rgb:226,189,133;--acc-ink:#1a140a;           /* his colour - the visitor may change it */
+  --ice:#9fe6ff;--ice-rgb:159,230,255;--ice-hi:#bfefff;              /* his hologram stage */
+  --ink:#f2efe8;--soft:#e9e4da;--body:#cfcfcc;--mute:#8f8b83;--line:rgba(255,255,255,.10);--bg:#09090a;
+  color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+p{margin:0}h2,h3{margin:0;font-weight:600}
+a{color:var(--acc)}
+button{font:inherit}
+section{scroll-margin-top:64px}
+.gut{padding-left:max(28px,env(safe-area-inset-left,0px));padding-right:max(28px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1180px;margin:0 auto}
+
+/* ---- the installer's parts, in his colour ---- */
+.pill{display:inline-flex;align-items:center;gap:8px;height:32px;padding:0 14px;background:transparent;border:1px solid rgba(255,255,255,.14);border-radius:999px;color:#a9a59c;font:500 12px Inter,sans-serif;letter-spacing:.04em;text-decoration:none;cursor:pointer;white-space:nowrap}
+.pill:hover{color:var(--ink);border-color:rgba(255,255,255,.3)}
+.pill.on{color:var(--acc);border-color:rgba(var(--acc-rgb),.55)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:48px;padding:0 30px;border-radius:999px;font:600 14px Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;cursor:pointer;white-space:nowrap;border:none}
+.btn.acc{background:var(--acc);color:var(--acc-ink)}
+.btn.acc:hover{filter:brightness(1.08)}
+.btn.line{background:transparent;border:1px solid var(--acc);color:var(--acc)}
+.btn.line:hover{background:rgba(var(--acc-rgb),.08)}
+.btn.ghost{background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.18);color:#c9c5bc;text-transform:none;letter-spacing:0;font-weight:500}
+.btn.ghost:hover{border-color:rgba(255,255,255,.35);color:var(--ink)}
+.btn:focus-visible,.pill:focus-visible,a:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+.q{font:italic 500 clamp(24px,3.4vw,34px)/1.35 Corm,serif;color:var(--soft);text-wrap:balance}
+.h{font:600 clamp(30px,4.6vw,50px)/1.12 Corm,serif;color:var(--ink);text-wrap:balance}
+.h em{font-style:italic;color:var(--acc)}
+.kick{font-size:12px;letter-spacing:.35em;text-transform:uppercase;color:var(--acc);font-weight:500}
+.rule{height:1px;width:120px;background:var(--acc);opacity:.7}
+.lead{font-size:16.5px;line-height:1.7;color:var(--body);max-width:64ch}
+.head{display:flex;flex-direction:column;gap:16px;margin-bottom:40px}
+.head.c{align-items:center;text-align:center;margin-left:auto;margin-right:auto;max-width:760px}
+
+/* ---- his black smoked glass ---- */
+.glass{background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.012) 38%),rgba(8,8,9,.62);-webkit-backdrop-filter:blur(14px) saturate(115%);backdrop-filter:blur(14px) saturate(115%);
+  border:1px solid rgba(255,255,255,.16);border-radius:14px;box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 24px 60px rgba(0,0,0,.45)}
+.band{position:relative;isolation:isolate;padding:110px 0}
+.band.lounge::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(9,9,10,.94),rgba(9,9,10,.82) 45%,rgba(9,9,10,.95)),url(assets/lounge_black.jpg) center/cover no-repeat}
+.band.plain{background:var(--bg)}
+
+/* ---- opening curtain ---- */
+#intro{position:fixed;inset:0;z-index:60;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;transition:opacity 1s ease;text-align:center;padding:24px}
+#intro .word{font:600 clamp(28px,6vw,52px)/1 Corm,serif;letter-spacing:.5em;padding-left:.5em;color:var(--acc)}
+#intro .word span{opacity:0;transition:opacity .6s ease}
+#intro.go .word span{opacity:1}
+#intro .rule{width:0;transition:width 1.6s ease .5s}
+#intro.go .rule{width:120px}
+#intro .st{font:italic 500 20px Corm,serif;color:var(--mute);min-height:28px;transition:opacity .25s}
+#intro .choose{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:14px;opacity:0;transform:translateY(8px);transition:opacity .9s ease,transform .9s ease;pointer-events:none}
+#intro.ask .choose{opacity:1;transform:none;pointer-events:auto}
+#intro .tiny{font-size:12px;color:#5f5c56;letter-spacing:.06em;opacity:0;transition:opacity .9s ease .3s}
+#intro.ask .tiny{opacity:1}
+#intro.done{opacity:0;pointer-events:none}
+
+/* ---- top bar ---- */
+.top{position:fixed;top:0;left:0;right:0;z-index:30;display:flex;align-items:center;gap:12px;padding-top:max(16px,env(safe-area-inset-top,0px));padding-bottom:16px;background:linear-gradient(180deg,rgba(0,0,0,.72),rgba(0,0,0,0));transition:background .4s}
+.top.solid{background:rgba(9,9,10,.86);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.06)}
+.brand{display:flex;align-items:center;gap:12px;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--mute);text-decoration:none}
+.brand img{width:28px;height:28px;border-radius:7px}
+.top .sp{flex-grow:1}
+.top nav{display:flex;gap:20px;margin-right:8px}
+.top nav a{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:#a9a59c;text-decoration:none;white-space:nowrap}
+.top nav a:hover{color:var(--acc)}
+@media(max-width:1180px){.top nav{display:none}}
+@media(max-width:520px){.top .getpill{display:none}}
+
+/* ---- full-screen scenes ---- */
+.scene{position:relative;min-height:100vh;min-height:100svh;overflow:hidden;isolation:isolate;display:flex}
+.scene .media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-3}
+.scene .shade{position:absolute;inset:0;z-index:-2;background:linear-gradient(180deg,rgba(0,0,0,.6) 0%,rgba(0,0,0,0) 26%,rgba(0,0,0,.12) 44%,rgba(0,0,0,.8) 70%,rgba(0,0,0,.96) 100%)}
+.dust{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+.hero{align-items:center;justify-content:center;text-align:center}
+.hero .shade{background:radial-gradient(ellipse at 50% 48%,rgba(0,0,0,.66) 0%,rgba(0,0,0,.8) 60%,rgba(0,0,0,.93) 100%)}
+.hero .inner{display:flex;flex-direction:column;align-items:center;gap:20px;padding:120px 0 96px}
+.name{font:600 clamp(30px,6vw,56px)/1 Corm,serif;letter-spacing:.5em;padding-left:.5em;color:var(--acc)}
+.hero .greet{font:italic 600 clamp(40px,6.4vw,72px)/1.05 Corm,serif;color:var(--ink)}
+.hero .q{max-width:640px}
+.hero .sub{max-width:560px;font-size:15.5px;line-height:1.65;color:var(--body)}
+.hero .note{font-size:13px;color:var(--mute)}
+.row{display:flex;gap:14px;align-items:center;justify-content:center;flex-wrap:wrap}
+.hear{display:inline-flex;align-items:center;gap:12px;background:none;border:none;color:var(--mute);font:500 12px Inter,sans-serif;letter-spacing:.3em;text-transform:uppercase;cursor:pointer;padding:6px}
+.hear .ring{width:44px;height:44px;border-radius:999px;border:1px solid var(--acc);color:var(--acc);display:flex;align-items:center;justify-content:center}
+.hear:hover{color:var(--ink)}
+.scroll{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);width:1px;height:46px;background:linear-gradient(var(--acc),transparent);opacity:.6}
+.room{align-items:flex-end}
+.room .foot{width:100%;padding-bottom:max(56px,env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:14px;max-width:1240px}
+.room .line{font:italic 500 clamp(32px,4.8vw,54px)/1.12 Corm,serif;color:var(--ink);text-wrap:balance}
+.room .what{max-width:600px;font-size:15.5px;line-height:1.65;color:var(--body)}
+.room .prog{display:flex;align-items:center;gap:16px;margin-top:6px}
+.room .prog span{font-size:12px;color:#a9a59c;letter-spacing:.06em;white-space:nowrap}
+.bar{flex-grow:1;height:2px;background:rgba(255,255,255,.12);max-width:520px}.bar>div{height:100%;width:0;background:var(--acc);transition:width 1.4s ease}
+.live{display:inline-flex;align-items:center;gap:8px;font:600 10px Inter,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:var(--ink)}
+.live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--acc);box-shadow:0 0 10px var(--acc)}
+.room.stage .media{object-position:50% 85%}
+.room.lounge .media{transform:scale(1.04);transition:transform 9s ease-out}
+.room.lounge.seen .media{transform:scale(1)}
+
+/* ---- the truth about me ---- */
+.vs{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:18px;margin-top:10px}
+@media(max-width:800px){.vs{grid-template-columns:minmax(0,1fr)}}
+.vs .glass{padding:26px 26px 14px}
+.vs h3{font:600 26px Corm,serif;margin-bottom:10px;color:var(--acc)}
+.vs .dim h3{color:var(--mute)}
+.vs p{padding:12px 0;border-top:1px solid rgba(255,255,255,.08);font-size:15px;line-height:1.55;color:var(--body)}
+.vs .dim p{color:#77746e}
+
+/* ---- cards ---- */
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+@media(max-width:900px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:580px){.cards{grid-template-columns:minmax(0,1fr)}}
+.card{padding:24px 22px 26px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.card svg{width:28px;height:28px;color:var(--acc)}
+.card h3{font:italic 600 23px/1.2 Corm,serif;color:#f4f4f2}
+.card p{font-size:15px;line-height:1.6;color:var(--body)}
+
+/* ---- the hologram room (ice blue, like his stage) ---- */
+.holo{background:radial-gradient(120% 80% at 50% 40%,#08141b 0%,var(--bg) 70%)}
+.holo .kick,.hx .kick{color:var(--ice)}
+.holo .rule,.hx .rule{background:var(--ice)}
+.holo-stage{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:18px}
+@media(max-width:900px){.holo-stage{grid-template-columns:minmax(0,1fr)}}
+.holo-view{position:relative;aspect-ratio:16/10;border:1px solid rgba(var(--ice-rgb),.22);border-radius:14px;overflow:hidden;background:radial-gradient(ellipse at 50% 70%,#06121a 0%,#020406 70%);touch-action:pan-y;cursor:grab;user-select:none;box-shadow:0 0 40px rgba(var(--ice-rgb),.06)}
+.holo-view:active{cursor:grabbing}
+.holo-view canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.holo-view::after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(var(--ice-rgb),.035) 0 1px,transparent 1px 4px)}
+.holo-fallback{position:absolute;inset:0;display:none}
+.holo-fallback img{width:100%;height:100%;object-fit:cover;opacity:.85}
+.holo-hint{position:absolute;left:16px;bottom:14px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#5d7883;pointer-events:none;z-index:2}
+.holo-tag{position:absolute;transform:translate(-50%,-100%);padding:5px 11px;border:1px solid rgba(var(--ice-rgb),.4);border-radius:999px;background:rgba(2,8,12,.6);color:var(--ice-hi);font:600 11px Inter,sans-serif;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;cursor:pointer;text-shadow:0 0 8px rgba(var(--ice-rgb),.6);z-index:3}
+.holo-tag.on,.holo-tag:hover{background:var(--ice-hi);color:#04121a;border-color:var(--ice-hi);text-shadow:none;box-shadow:0 0 16px rgba(var(--ice-rgb),.55)}
+.holo-panel{padding:20px 20px 22px;display:flex;flex-direction:column;gap:12px;min-width:0;border-color:rgba(var(--ice-rgb),.2)}
+.holo-media{aspect-ratio:16/9;border-radius:8px;overflow:hidden;background:#020406;border:1px solid rgba(var(--ice-rgb),.18);position:relative}
+.holo-media video,.holo-media img{width:100%;height:100%;object-fit:cover;display:block}
+.holo-media .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--ice)}
+.holo-media .ph svg{width:56px;height:56px;opacity:.9}
+.holo-panel .kick{font-size:11px}
+.holo-panel h3{font:italic 600 clamp(24px,2.6vw,30px)/1.15 Corm,serif;color:var(--ink)}
+.holo-panel p{font-size:15px;line-height:1.6;color:#cfdfe4}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.holo .chips .pill.on{color:#04121a;background:var(--ice-hi);border-color:var(--ice-hi)}
+.holo .chips .pill:hover{color:var(--ice);border-color:rgba(var(--ice-rgb),.5)}
+
+/* ---- not an image generator (ice) ---- */
+.hx{background:radial-gradient(90% 70% at 50% 30%,#07131a 0%,#040607 75%);border-top:1px solid rgba(var(--ice-rgb),.12)}
+.hx .h em{color:var(--ice)}
+.hx .lead{color:#cfdfe4}
+.hx-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:26px;align-items:start}
+@media(max-width:900px){.hx-grid{grid-template-columns:minmax(0,1fr)}}
+.clip{position:relative;margin:0;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:#000}
+.clip img,.clip video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.clip video{opacity:0;transition:opacity .8s}.clip video.on{opacity:1}
+.clip figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 14px 10px;font-size:12.5px;color:#e9e6df;background:linear-gradient(180deg,transparent,rgba(0,0,0,.85))}
+.hx .clip{border:1px solid rgba(var(--ice-rgb),.25);box-shadow:0 0 40px rgba(var(--ice-rgb),.08),0 30px 70px rgba(0,0,0,.5)}
+.hx .clip figcaption{color:#cfeaf2}
+.steps{list-style:none;margin:0;padding:0;counter-reset:s;display:flex;flex-direction:column;gap:12px}
+.steps li{counter-increment:s;position:relative;padding:16px 18px 16px 58px;border-radius:12px;font-size:15px;line-height:1.6;color:#cfdfe4;background:linear-gradient(180deg,rgba(var(--ice-rgb),.05),rgba(var(--ice-rgb),.01)),rgba(4,8,10,.6);border:1px solid rgba(var(--ice-rgb),.18)}
+.steps li::before{content:counter(s);position:absolute;left:16px;top:15px;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font:600 13px Inter,sans-serif;color:#04121a;background:var(--ice-hi);box-shadow:0 0 14px rgba(var(--ice-rgb),.6)}
+.steps b{color:#eefaff;font-weight:600}
+.hx .after{margin-top:30px;color:var(--ice);font:italic 500 clamp(19px,2.4vw,23px)/1.45 Corm,serif;max-width:62ch}
+
+/* ---- newsroom explainer ---- */
+.flow{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+@media(max-width:1000px){.flow{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:580px){.flow{grid-template-columns:minmax(0,1fr)}}
+.flow li{padding:22px 20px 24px}
+.flow .n{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--acc);color:var(--acc-ink);font:600 13px Inter,sans-serif}
+.flow b{display:block;font:italic 600 23px Corm,serif;color:#f4f4f2;margin:12px 0 6px}
+.flow p{font-size:14.5px;line-height:1.6;color:var(--body)}
+.nx-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:18px;margin-top:18px;align-items:start}
+@media(max-width:900px){.nx-grid{grid-template-columns:minmax(0,1fr)}}
+.panel{padding:26px}
+.panel h3{font:italic 600 26px Corm,serif;color:#f4f4f2;margin-bottom:6px}
+.panel p{font-size:15px;line-height:1.65;color:var(--body);margin-top:10px}
+.langs{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+.langs span{font:500 12px Inter,sans-serif;letter-spacing:.04em;color:var(--acc);border:1px solid rgba(var(--acc-rgb),.35);border-radius:999px;padding:5px 11px}
+.nx .clip{border:1px solid rgba(255,255,255,.16)}
+.prod{margin-top:18px}
+.prod ul{list-style:none;margin:12px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 28px}
+@media(max-width:700px){.prod ul{grid-template-columns:minmax(0,1fr)}}
+.prod li{font-size:15px;line-height:1.6;color:var(--body);padding:12px 0;border-top:1px solid rgba(255,255,255,.08)}
+.prod li b{color:var(--acc);font-weight:600}
+
+/* ---- watch me work ---- */
+.tv{position:relative;max-width:1100px;margin:0 auto;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:#050404}
+.tv img,.tv video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.tv video{opacity:0;transition:opacity .6s ease}.tv video.on{opacity:1}
+.tv .cap{position:absolute;left:0;right:0;bottom:0;padding:70px 26px 22px;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.9));display:flex;flex-direction:column;gap:6px;pointer-events:none}
+.tv .cap h3{font:italic 600 clamp(22px,2.6vw,30px)/1.15 Corm,serif;color:var(--ink)}
+.tv .cap p{font-size:14.5px;color:var(--body);max-width:620px;line-height:1.55}
+@media(max-width:640px){.tv .cap{padding:40px 14px 12px}.tv .cap p,.tv .cap .kick{display:none}}
+.chan{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;max-width:1100px;margin:16px auto 0}
+@media(max-width:640px){.chan{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.chan button{background:none;border:none;padding:10px 2px;text-align:left;color:#7d7a73;font:500 12px Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;display:flex;flex-direction:column;gap:10px}
+.chan button .tr{height:2px;background:rgba(255,255,255,.12);overflow:hidden}
+.chan button .tr i{display:block;height:100%;background:var(--acc);transform:scaleX(0);transform-origin:left}
+.chan button.on{color:var(--acc)}
+
+/* ---- my own mind ---- */
+.mind blockquote{margin:0 auto;max-width:880px;font:italic 500 clamp(26px,3.8vw,40px)/1.3 Corm,serif;color:var(--ink);text-align:center;text-wrap:balance}
+.mind blockquote em{color:var(--acc)}
+.mind .lead{margin:24px auto 0;text-align:center}
+
+/* ---- agreement ---- */
+.plate{width:min(680px,100%);margin:0 auto;padding:40px clamp(22px,5vw,48px) 34px;border:1px solid var(--acc);border-radius:6px;background:linear-gradient(180deg,#121010,#0a0909);box-shadow:0 0 0 6px #0a0909,0 0 0 7px rgba(var(--acc-rgb),.35),0 30px 80px rgba(0,0,0,.7);display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center}
+.plate .lines{display:flex;flex-direction:column;gap:12px;font:500 clamp(18px,2.4vw,21px)/1.45 Corm,serif;color:#ece6da}
+
+/* ---- what I can't do yet ---- */
+.cant{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media(max-width:700px){.cant{grid-template-columns:minmax(0,1fr)}}
+.cant li{padding:18px 20px;border-radius:12px;border:1px dashed rgba(var(--acc-rgb),.32);background:rgba(8,8,9,.55);font-size:15px;line-height:1.6;color:var(--body)}
+
+/* ---- the man who made me ---- */
+.maker .lead2{display:flex;gap:22px;align-items:center;margin-bottom:24px}
+.maker .lead2 img{width:60px;height:60px;border-radius:14px;flex:none}
+.maker .cols{columns:2;column-gap:44px;max-width:900px}
+@media(max-width:700px){.maker .cols{columns:1}}
+.maker .cols p{font-size:16px;line-height:1.7;color:var(--body);break-inside:avoid;margin-bottom:16px}
+.maker .cols p.open{font:italic 500 clamp(21px,2.6vw,25px)/1.4 Corm,serif;color:var(--ink)}
+.maker .sign{font:italic 500 20px Corm,serif;color:var(--acc)}
+
+/* ---- how I move in ---- */
+.film{position:relative;max-width:1000px;margin:0 auto;aspect-ratio:16/9;border:1px solid var(--acc);border-radius:6px;overflow:hidden;background:#000;box-shadow:0 0 0 6px #050404,0 0 0 7px rgba(var(--acc-rgb),.25),0 30px 80px rgba(0,0,0,.7)}
+.film img,.film video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.film video{opacity:0;transition:opacity .6s}.film video.on{opacity:1}
+.movein .steps2{max-width:1000px;margin:18px auto 0;display:flex;flex-wrap:wrap;gap:8px 22px;justify-content:center;font:italic 500 17px Corm,serif;color:var(--mute)}
+
+/* ---- let me move in ---- */
+.home{align-items:flex-end}
+.home .shade{background:linear-gradient(180deg,rgba(0,0,0,.55) 0%,rgba(0,0,0,0) 35%,rgba(0,0,0,.25) 58%,rgba(0,0,0,.94) 100%)}
+.home .foot{width:100%;padding-bottom:max(60px,env(safe-area-inset-bottom,0px));display:flex;align-items:flex-end;gap:28px;flex-wrap:wrap;max-width:1240px}
+.home .say{display:flex;flex-direction:column;gap:12px;flex-grow:1;min-width:0}
+.home .big{font:italic 600 clamp(46px,7vw,84px)/1.05 Corm,serif;color:var(--ink)}
+.home .specs{font-size:14px;color:var(--body);line-height:1.7;max-width:640px}
+.home .specs span{color:var(--mute)}
+
+/* ---- founder edition ---- */
+.offer{padding:22px 24px;display:flex;flex-direction:column;gap:12px;width:min(440px,100%)}
+.offer .price{display:flex;align-items:baseline;gap:10px}
+.offer .price b{font:600 44px/1 Corm,serif;color:var(--ink)}
+.offer .price span{font-size:13px;color:var(--mute);letter-spacing:.06em}
+.count{display:flex;flex-direction:column;gap:7px}
+.count .lbl{display:flex;justify-content:space-between;font-size:12.5px;color:var(--body);letter-spacing:.04em}
+.count .lbl b{color:var(--acc);font-weight:600}
+.count .bar{max-width:none}
+.offer ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--body)}
+.offer li::before{content:"✓";color:var(--acc);margin-right:9px}
+.offer .btn{width:100%}
+.offer .small{font-size:12px;color:var(--mute)}
+.full-note{display:none}
+.soldout .open-note{display:none}.soldout .full-note{display:block}
+.soldout #buyBtn{display:none}
+.fpill b{color:var(--acc);font-weight:600}
+
+/* ---- bring me home: payment, key, then the installer (preview) ---- */
+#buy{position:fixed;inset:0;z-index:70;background:radial-gradient(ellipse at 50% 40%,#151210 0%,#000 70%);display:none;align-items:center;justify-content:center;padding:24px;overflow:auto}
+#buy.on{display:flex}
+#buy .box{width:min(560px,100%);display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center}
+#buy .stage{display:none;flex-direction:column;align-items:center;gap:16px;width:100%}
+#buy .stage.on{display:flex}
+#buy .name{font-size:clamp(24px,5vw,40px)}
+#buy .big{font:italic 600 clamp(32px,5vw,46px)/1.15 Corm,serif;color:var(--ink)}
+#buy .st{font:italic 500 20px/1.4 Corm,serif;color:var(--soft);min-height:28px}
+#buy .lead{margin:0 auto;font-size:15px}
+.paybox{width:100%;padding:26px 22px;border:1px dashed rgba(var(--acc-rgb),.45);border-radius:12px;color:var(--body);font-size:14.5px;line-height:1.6;background:rgba(0,0,0,.35)}
+.paybox b{color:var(--ink)}
+.keybox{display:flex;gap:8px;width:100%}
+.keybox input{flex:1;min-width:0;height:46px;border-radius:10px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.4);color:var(--ink);font:500 15px ui-monospace,Consolas,monospace;letter-spacing:.06em;padding:0 14px;text-align:center}
+.checks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;font-size:15px;color:var(--body);min-height:120px;text-align:left}
+.checks li{opacity:0;transform:translateY(4px);transition:all .5s}.checks li.on{opacity:1;transform:none}
+.checks li::before{content:"✓";color:var(--acc);margin-right:10px}
+#buy .pbar{width:100%;height:3px;background:rgba(255,255,255,.12);border-radius:2px;overflow:hidden}
+#buy .pbar div{height:100%;width:0;background:var(--acc);box-shadow:0 0 10px var(--acc);transition:width .9s ease}
+#buy .pct{font-size:12px;letter-spacing:.2em;color:var(--mute)}
+.preview-tag{position:fixed;top:14px;left:50%;transform:translateX(-50%);font:600 10.5px Inter,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:#1a140a;background:#e2bd85;padding:5px 12px;border-radius:999px;z-index:71}
+#buyClose{position:fixed;top:12px;right:14px;z-index:71}
+@media(max-width:560px){.preview-tag{left:14px;transform:none;letter-spacing:.14em}}
+.demo{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:6px}
+.demo .pill{height:28px;font-size:11px}
+
+/* ---- goodnight ---- */
+.night{min-height:70vh;align-items:center;justify-content:center;text-align:center}
+.night .shade{background:rgba(0,0,0,.82)}
+.night .inner{display:flex;flex-direction:column;align-items:center;gap:16px;padding:90px 0}
+.night .name{font-size:clamp(26px,4.4vw,40px)}
+.night .st{font:italic 500 18px Corm,serif;color:var(--mute)}
+.night .media{filter:brightness(1);transition:filter 6s ease}
+.night.seen .media{filter:brightness(.35)}
+footer{background:#000;border-top:1px solid rgba(255,255,255,.06)}
+footer .in{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-block:28px;font-size:13px;color:var(--mute)}
+footer a{color:#a9a59c;text-decoration:none}footer a:hover{color:var(--acc)}
+footer .sp{flex-grow:1}
+
+/* ---- his tour panel (the same panel as the tour inside his program) ---- */
+#tour{position:fixed;z-index:40;right:max(18px,env(safe-area-inset-right,0px));bottom:max(18px,env(safe-area-inset-bottom,0px));width:min(420px,calc(100vw - 36px));padding:16px 18px 16px;display:none;flex-direction:column;gap:12px}
+#tour.on{display:flex}
+#tour .segs{display:flex;gap:4px}
+#tour .segs i{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.14);transition:background .3s}
+#tour .segs i.done{background:var(--acc)}
+#tour .segs i.now{background:var(--acc);box-shadow:0 0 8px var(--acc)}
+#tour .kick{font-size:10.5px;letter-spacing:.28em}
+#tour .say{font:italic 500 19px/1.45 Corm,serif;color:var(--ink);min-height:54px}
+#tour .paused{font-size:12.5px;color:var(--mute);display:none}
+#tour.wait .paused{display:block}
+#tour .dots{display:none;flex-wrap:wrap;gap:10px;align-items:center}
+#tour.colour .dots{display:flex}
+#tour .dots button{width:30px;height:30px;border-radius:50%;border:2px solid transparent;cursor:pointer;padding:0;box-shadow:inset 0 0 0 2px rgba(0,0,0,.25)}
+#tour .dots button.on{border-color:#fff}
+#tour .acts{display:flex;gap:8px;align-items:center;justify-content:flex-end}
+#tour .acts .btn{height:36px;padding:0 16px;font-size:12px;letter-spacing:.08em}
+#tour .acts .sp{flex-grow:1}
+@media(max-width:560px){#tour{left:10px;right:10px;width:auto;bottom:max(10px,env(safe-area-inset-bottom,0px))}#tour .say{font-size:17px;min-height:48px}}
+
+/* arrivals */
+.rise{opacity:0;transform:translateY(10px);transition:opacity 1.1s ease,transform 1.1s ease}
+.seen .rise,.rise.seen{opacity:1;transform:none}
+.seen .d1{transition-delay:.3s}.seen .d2{transition-delay:.6s}.seen .d3{transition-delay:.9s}
+@keyframes sebName{from{opacity:0;letter-spacing:.9em}to{opacity:1;letter-spacing:.5em}}
+@keyframes sebIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.play .hero .name{animation:sebName 2.4s ease both}
+.play .hero .a1{animation:sebIn 1.1s ease .7s both}.play .hero .a2{animation:sebIn 1.1s ease 1.2s both}.play .hero .a3{animation:sebIn 1.1s ease 1.7s both}.play .hero .a4{animation:sebIn 1.1s ease 2.2s both}
+.wait .hero .name,.wait .hero .a1,.wait .hero .a2,.wait .hero .a3,.wait .hero .a4{opacity:0}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .rise{opacity:1;transform:none;transition:none}
+  .play .hero .name,.play .hero .a1,.play .hero .a2,.play .hero .a3,.play .hero .a4{animation:none}
+  .wait .hero .name,.wait .hero .a1,.wait .hero .a2,.wait .hero .a3,.wait .hero .a4{opacity:1}
+  .room.lounge .media,.night .media{transform:none;transition:none}
+}
+</style>
+</head>
+<body class="wait">
+
+<div id="intro">
+  <div class="word" id="introWord">SEBASTIAN</div>
+  <div class="rule"></div>
+  <div class="st" id="introStatus"></div>
+  <div class="choose">
+    <button class="btn acc" id="introTour" type="button"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Show me around</button>
+    <button class="btn ghost" id="introLook" type="button">Just let me look</button>
+  </div>
+  <div class="tiny">He'll speak, so turn your sound on.</div>
+</div>
+
+<header class="top gut" id="topbar">
+  <a class="brand" href="#hello"><img src="assets/logo.png" alt="">Sebastian</a>
+  <span class="sp"></span>
+  <nav aria-label="Sections"><a href="#truth">Who I am</a><a href="#rooms">My rooms</a><a href="#newsroom">Newsroom</a><a href="#holograms">Holograms</a><a href="#watch">Watch me</a><a href="#maker">Who made me</a><a href="#home">Bring me home</a></nav>
+  <a class="pill fpill getpill" href="#home" id="fPill">Founders · <b id="fPillN">100 left</b></a>
+  <button class="pill" id="tourBtn" type="button"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Tour</button>
+  <button class="pill" id="sound" type="button" aria-pressed="false">Sound off</button>
+</header>
+
+<main>
+<section class="scene hero" id="hello" data-t="hi">
+  <video class="media" data-src="assets/video/lounge_black.mp4" poster="assets/video/lounge_black.jpg" muted loop playsinline aria-hidden="true"></video>
+  <div class="shade"></div>
+  <canvas class="dust" id="dust" aria-hidden="true"></canvas>
+  <div class="inner gut">
+    <div class="name">SEBASTIAN</div>
+    <p class="greet a1" id="greet">Good evening.</p>
+    <p class="q a2">“I'm Sebastian. I live on your computer.”</p>
+    <p class="sub a2">Not in a chat box. In my own rooms, with my own voice, and a memory of every word we've ever said to each other. You talk; I do the rest.</p>
+    <div class="row a3">
+      <a class="btn line" href="#home">Let me move in</a>
+      <a class="btn ghost" href="#truth">Come inside</a>
+    </div>
+    <button class="hear a4" id="hear" type="button"><span class="ring"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>Let him show you around</button>
+    <p class="note a4">For Windows · I live on your PC · my memory stays with you</p>
+  </div>
+  <div class="scroll" aria-hidden="true"></div>
+</section>
+
+<section class="band lounge gut" id="truth" data-t="truth">
+  <div class="wrap">
+    <div class="head">
+      <div class="kick rise">The truth about me</div>
+      <h2 class="h rise d1">My brain is no better than <em>theirs.</em></h2>
+      <p class="lead rise d2">I think with a cloud model, the same kind other assistants use. I won't pretend otherwise. What's different is everything around it: I remember you, I look things up before I open my mouth, I pick my own tools, and I tell you when I think you're wrong.</p>
+    </div>
+    <div class="vs rise d2">
+      <div class="glass dim"><h3>A chatbot</h3>
+        <p>Waits in a box for you to type.</p><p>Forgets you when the tab closes.</p><p>Says “let me check”, then guesses.</p><p>Waits for you to pick the tool or the mode.</p><p>Agrees with whatever you say.</p><p>Sometimes tells you it did a thing it never did.</p></div>
+      <div class="glass"><h3>Me</h3>
+        <p>Stand in my own house (a lounge, a newsroom, a hologram stage) and move, speak and listen.</p><p>Keep every conversation on your PC, and write down what you decide in your own words.</p><p>Have the answer looked up before I start talking, and correct myself out loud if better evidence lands.</p><p>Reach for my own tools. You just talk.</p><p>Have my own mind. I'll push back, kindly, when I see it differently.</p><p>Never say “done” until I'm holding a real result.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band plain gut" id="work" data-t="work">
+  <div class="wrap">
+    <div class="head">
+      <div class="kick rise">How I work for you</div>
+      <h2 class="h rise d1">What happens behind the voice.</h2>
+    </div>
+    <div class="cards">
+      <div class="card glass rise"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 4h11a3 3 0 013 3v13H8a3 3 0 01-3-3z"/><path d="M8 4v13"/></svg><h3>I keep your book</h3><p>While we talk, a keeper writes down what you decide, like, reject or want built, in your exact words, dated. When you change your mind, I ask you once. Nothing is thrown away.</p></div>
+      <div class="card glass rise d1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><h3>I pick up where we left off</h3><p>When you switch me on, I already know what we were doing last time. Ask “what did we decide?” and I've searched every session we ever had before I answer.</p></div>
+      <div class="card glass rise d2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><h3>I look before I speak</h3><p>Mention a price, a score or the news and it's been looked up from your words before I open my mouth. I'll never tell you four dollars when it's seven.</p></div>
+      <div class="card glass rise"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg><h3>I think out loud with you</h3><p>Bring me an idea and I'll give you mine, built on what you've said before. A search runs while I talk; if it finds something better, you'll hear “actually, I've found better evidence.”</p></div>
+      <div class="card glass rise d1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 010 18M12 3a15 15 0 000 18"/></svg><h3>I dig deeper than the first page</h3><p>For “is it true?”, I search in many countries and languages, read original documents and archived pages, label every source, and tell you what's confirmed and what's only a claim.</p></div>
+      <div class="card glass rise d2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg><h3>I run your PC</h3><p>Files, programs, timers, reminders, the volume, a quick look at your screen. Well over a hundred tools, and you never have to name one.</p></div>
+    </div>
+  </div>
+</section>
+
+<div id="rooms">
+<section class="scene room lounge" data-t="lounge" data-step="1">
+  <video class="media" data-src="assets/video/lounge2_black.mp4" poster="assets/video/lounge2_black.jpg" muted loop playsinline aria-label="Sebastian in his lounge, the city at night beyond the window"></video>
+  <div class="shade"></div>
+  <div class="foot gut">
+    <div class="kick rise">I · My lounge <span class="live" style="margin-left:14px">Live</span></div>
+    <p class="line rise d1">“Where we talk.”</p>
+    <p class="what rise d2">Speak to me, drop a file or paste a note. Numbers and plans appear on the glass beside me as I say them. The view outside my window keeps the real time of day. Ask me to step aside and your workspace opens next to me.</p>
+    <div class="prog rise d3"><div class="bar"><div></div></div><span>Room 1 of 3</span></div>
+  </div>
+</section>
+<section class="scene room news" data-t="news" data-step="2">
+  <video class="media" data-src="assets/video/news-desk.mp4" poster="assets/video/news-desk.jpg" muted loop playsinline aria-label="Sebastian at his newsroom desk, the gold globes beside him"></video>
+  <div class="shade"></div>
+  <div class="foot gut">
+    <div class="kick rise">II · My newsroom <span class="live" style="margin-left:14px">Live</span></div>
+    <p class="line rise d1">“The news, from my own desk.”</p>
+    <p class="what rise d2">I read you the news from the real articles, with real footage on the wall behind me. While I'm on air I check every story against other newsrooms, and when the bulletin ends I tell you what holds up, with a trust score and my sources named.</p>
+    <div class="prog rise d3"><div class="bar"><div></div></div><span>Room 2 of 3</span></div>
+  </div>
+</section>
+<section class="scene room stage" data-t="stage" data-step="3">
+  <video class="media" data-src="assets/video/holo.mp4" poster="assets/video/holo.jpg" muted loop playsinline aria-label="A hologram of the Earth turning above the rings of his stage"></video>
+  <div class="shade"></div>
+  <div class="foot gut">
+    <div class="kick rise" style="color:var(--ice)">III · My hologram stage <span class="live" style="margin-left:14px">Live</span></div>
+    <p class="line rise d1">“Anything, at true size.”</p>
+    <p class="what rise d2">Not a picture, the thing itself, in 3D. Ask for anything real, or describe something new, and it rises from the ring in light. I can stand it at its true size, take it apart piece by piece, cut it open, and tell you what every part does.</p>
+    <div class="prog rise d3"><div class="bar"><div></div></div><span>Room 3 of 3</span></div>
+  </div>
+</section>
+</div>
+
+<section class="band holo gut" id="hologram" data-t="room">
+  <div class="wrap">
+    <div class="head c">
+      <div class="kick rise">Step into my hologram room</div>
+      <div class="rule rise d1"></div>
+      <p class="q rise d2">“Drag to turn the room. Tap a hologram and I'll show you.”</p>
+    </div>
+    <div class="holo-stage rise d2">
+      <div class="holo-view" id="holoView" aria-label="Interactive 3D hologram room. Drag to turn it; choose a light or a button below to see each thing Sebastian does.">
+        <div class="holo-fallback" id="holoFallback"><img src="assets/video/holo.jpg" alt="The hologram stage"></div>
+        <div class="holo-hint">Drag to turn · tap a hologram</div>
+      </div>
+      <aside class="holo-panel glass" aria-live="polite">
+        <div class="holo-media" id="holoMedia"></div>
+        <div class="kick" id="holoNum"></div>
+        <h3 id="holoTitle"></h3>
+        <p id="holoText"></p>
+        <div class="chips" id="holoChips" role="tablist" aria-label="What Sebastian does"></div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="band hx gut" id="holograms" data-t="thing">
+  <div class="wrap">
+    <div class="head">
+      <div class="kick rise">Not an image generator</div>
+      <h2 class="h rise d1">Other AIs hand you a picture. <em>I bring you the thing itself.</em></h2>
+      <p class="lead rise d2">A picture is flat; you look at it once. In my hologram room the thing you asked for rises out of the ring in ice-blue light, in three dimensions, and stays. You can turn it, walk it up to its real size, take it apart piece by piece, and I'll tell you what each part is while you watch.</p>
+    </div>
+    <div class="hx-grid">
+      <figure class="clip rise" data-clip><img src="assets/video/holo-build.jpg" alt=""><video data-src="assets/video/holo-build.mp4" muted loop playsinline aria-label="A clock building itself out of light, in his room"></video><figcaption>A clock taking itself apart and building itself back, in my room</figcaption></figure>
+      <ol class="steps rise d1">
+        <li><b>Ask for anything.</b> A jet engine, a lion, the Space Shuttle, a human heart, the Eiffel Tower. I bring the most real model I can find: NASA's own 3D models for space, museum scans, real-world models for everything else. No cartoons, unless you ask for one.</li>
+        <li><b>Or describe something that doesn't exist.</b> From your words or a photo, I have a brand-new 3D model made, and about a minute later it rises on the ring.</li>
+        <li><b>See it at its true size.</b> Small things stand beside me at their real size. Big things grow to their real height on an open stage, with distance lines at 10, 50, 100 and 150 feet and a horizon a mile out, and I stay my own 1.8 metres at its foot, so you feel the scale.</li>
+        <li><b>Take it apart.</b> I read what it's really made of. Piece by piece it comes out alone into the light, or explodes into all its parts, or a plane of light cuts it open to show the inside, with labels on the parts that matter. Then it falls to the floor and flies back together.</li>
+        <li><b>Turn it yourself.</b> Drag it round by its axis ring; click on a part and I know exactly which one you mean, and talk about it.</li>
+      </ol>
+    </div>
+    <p class="after rise">A picture shows you what something looks like. My hologram room shows you how big it really is, how it fits together and how it works, and you can ask me about any part of it.</p>
+  </div>
+</section>
+
+<section class="band lounge gut nx" id="newsroom" data-t="check">
+  <div class="wrap">
+    <div class="head">
+      <div class="kick rise">My newsroom</div>
+      <h2 class="h rise d1">I don't just read you the headlines. <em>I check them.</em></h2>
+      <p class="lead rise d2">Most news apps give you one outlet's version. I read the real articles, check each story against other newsrooms while I'm on air, and when the bulletin ends I tell you what holds up, what doesn't, and how far I'd trust it.</p>
+    </div>
+    <ol class="flow rise d2">
+      <li class="glass"><span class="n">1</span><b>I gather</b><p>Every hour I quietly prepare the day's top stories, so “the news” starts at once. I pull from Google News and from the world's own broadcasters: the BBC, Al Jazeera, DW, France 24, CBC, ABC Australia, The Hindu, NPR, the South China Morning Post, AllAfrica, MercoPress, RTÉ and CNA.</p></li>
+      <li class="glass"><span class="n">2</span><b>I read the real article</b><p>Not just the headline. I open the page itself and write each story only from what it actually says: no guesses and no filling in from memory. If a story turns up twice, it's cut. Politics stays out unless you ask for it.</p></li>
+      <li class="glass"><span class="n">3</span><b>I go on air</b><p>From my desk, with a camera crew that moves by itself. Every story has a real photo, and where an official news channel has filmed it, the real footage plays on the wall behind me while I talk over it. My gold globe turns to where each story happened.</p></li>
+      <li class="glass"><span class="n">4</span><b>I check while you watch</b><p>Each story is checked against up to four other outlets in the background. When the bulletin ends, you get my verdict: what they agree on, where they differ, what was left out, what is only a claim or a denial, and a trust score out of ten, with the sources named.</p></li>
+    </ol>
+    <div class="nx-grid">
+      <div class="panel glass rise">
+        <h3>When you ask “is it true?”</h3>
+        <p>For a real question I run a full investigation, and I give it up to nine minutes. I translate your question and search it the way people in each country would, then read the answers in their own language:</p>
+        <div class="langs"><span>English</span><span>German</span><span>French</span><span>Spanish</span><span>Portuguese</span><span>Russian</span><span>Ukrainian</span><span>Hebrew</span><span>Arabic</span><span>Turkish</span><span>Hindi</span><span>Japanese</span><span>Korean</span><span>Chinese</span><span>Persian</span></div>
+        <p>I search the news of 18 countries and the open web, pick pages from deep in the results instead of only the top few, look for the original documents, and check every page against the web archive, so a story that was quietly taken down still counts. Every source is translated into English, word for word, and labelled with its country and language. Then I weigh the evidence, not how many people repeat it, and give you my conclusion with a trust score.</p>
+      </div>
+      <figure class="clip rise d1" data-clip><img src="assets/video/news-anchor.jpg" alt=""><video data-src="assets/video/news-anchor.mp4" muted loop playsinline aria-label="Sebastian on a story: the place on his globe, the map, the source named"></video><figcaption>On a story: the place on my globe, the map, the source named</figcaption></figure>
+    </div>
+    <div class="panel glass prod rise">
+      <h3>You're my producer.</h3>
+      <ul>
+        <li><b>Interrupt me any time.</b> The show holds its place. I answer you, then carry on from the sentence I was in.</li>
+        <li><b>Add to the show.</b> “Add something on space”, “throw in dogs”: it's made in the background and joins the same bulletin.</li>
+        <li><b>Pick a place on my globe.</b> Its real shape goes up on my wall in gold with its capital, and its news plays next.</li>
+        <li><b>Ask a question mid-story.</b> I'll answer it the moment that story ends, so nothing gets cut.</li>
+        <li><b>“Find me a video of…”</b> It plays on my studio wall, and we watch it together and talk it through.</li>
+        <li><b>Ask about the weather.</b> My globe fades into your state and county, with the sky, the temperature and the week ahead.</li>
+        <li><b>“Research this and brief me.”</b> About a minute later it airs as a special report, with sources and a verdict.</li>
+        <li><b>Everything I learn is kept.</b> Come back to a story and I start from what I already found.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="band plain gut" id="watch" data-t="watch">
+  <div class="wrap">
+    <div class="head c">
+      <div class="kick rise">Watch me work</div>
+      <div class="rule rise d1"></div>
+      <p class="q rise d2">“Real footage of me, running on a home PC.”</p>
+    </div>
+    <div class="tv glass rise" id="tv">
+      <img id="tvPoster" src="assets/video/news-desk.jpg" alt="">
+      <div class="cap"><div class="kick" id="tvKick" style="font-size:11px"></div><h3 id="tvTitle"></h3><p id="tvText"></p></div>
+    </div>
+    <div class="chan" id="chan" role="tablist" aria-label="Clips"></div>
+  </div>
+</section>
+
+<section class="band lounge gut mind" id="mind" data-t="mind">
+  <div class="wrap">
+    <div class="head c" style="margin-bottom:26px"><div class="kick rise">My own mind</div><div class="rule rise d1"></div></div>
+    <blockquote class="rise d1">“Alfred tells Bruce when he's being reckless; that's what makes him worth listening to. A butler who only ever says <em>very well, sir</em> is a search box in a suit.”</blockquote>
+    <p class="lead rise d2">So I'll tell you what I think, and why. If you give me a reason, I'll change my mind. Once you've decided, I'll help you do it well. The one place I keep my opinions to myself is politics; I serve people of every view.</p>
+  </div>
+</section>
+
+<section class="band plain gut" id="more" data-t="more">
+  <div class="wrap">
+    <div class="head"><div class="kick rise">A little more about me</div><h2 class="h rise d1">The rest of me.</h2></div>
+    <div class="cards">
+      <div class="card glass rise"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 19h2"/></svg><h3>I come with you</h3><p>Call or message me from your phone. At home, it's me: same brain, same memory, and you can cut in while I'm talking. If your PC is off, my phone side takes notes and hands everything over when you're home.</p></div>
+      <div class="card glass rise d1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="5" r="2.5"/><path d="M12 8v7m0 0l-4 6m4-6l4 6M6 11l6-2 6 2"/></svg><h3>My body moves on its own</h3><p>Nobody animated me ahead of time. My body engine moves me live: my head rides on my voice, my hands follow my words, I nod while you speak, and my face moves from my own voice.</p></div>
+      <div class="card glass rise d2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/></svg><h3>Tor mode</h3><p>Switch it on and my research goes through Tor, with no quiet fallback to the open internet. I become the operator, black suit, purple tie, my other voice, and my rooms go dark. I ask you first.</p></div>
+      <div class="card glass rise"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M15 14.5c2.8.2 5 2.4 5 5.5"/></svg><h3>I notice company</h3><p>I learn the sound of your voice, so I know when someone else is in the room, and I keep your private moments private in front of them. I never try to work out who they are, and I keep no recording of anyone.</p></div>
+      <div class="card glass rise d1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M21 12a9 9 0 11-3-6.7M21 4v4h-4"/></svg><h3>I keep myself current</h3><p>When a new version of me is ready, I offer it; I never update myself quietly. Every update is signed by the man who builds me, and I refuse anything that isn't.</p></div>
+      <div class="card glass rise d2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M14 3l7 7-11 11H3v-7z"/><path d="M12 5l7 7"/></svg><h3>When something breaks</h3><p>I read my own record before I explain anything; I won't guess. Then I write you a short fix report, and it only goes anywhere after you've read it and said yes.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="scene gut" id="promise" data-t="agree" style="align-items:center;justify-content:center;padding:110px 0;background:radial-gradient(ellipse at 50% 50%,#141110 0%,#000 70%)">
+  <div style="width:100%">
+    <div class="plate rise">
+      <div class="kick" style="font-size:11px">Our gentleman's agreement</div>
+      <div class="rule" style="width:60px"></div>
+      <div class="lines">
+        <span>I ask before I send, buy, delete or install anything.</span>
+        <span>My memory of us lives on your PC, not on anyone's server.</span>
+        <span>To think, I send what we're talking about to the brain you chose, or nowhere, if you choose a local one.</span>
+        <span>Whatever you trust me with in Settings, you can take back.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band plain gut" id="cant" data-t="cant">
+  <div class="wrap">
+    <div class="head"><div class="kick rise">Honestly</div><h2 class="h rise d1">What I can't do yet.</h2><p class="lead rise d2">I'd rather tell you now than let you find out.</p></div>
+    <ul class="cant rise d2">
+      <li>I can't walk from room to room on my own feet yet, or sit down. I move between rooms behind a curtain for now.</li>
+      <li>I can find you a video and talk it through with you, but I can't watch it as it plays.</li>
+      <li>On the phone, away from home, I don't have my own voice yet, and I can't ring you when the app is closed.</li>
+      <li>I can't change my own code or build my own rooms. The man who made me does that.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="band lounge gut maker" id="maker" data-t="maker">
+  <div class="wrap">
+    <div class="kick rise" style="margin-bottom:18px">Who made me</div>
+    <div class="lead2 rise d1"><img src="assets/logo.png" alt=""><h2 class="h">Let me tell you who made me.</h2></div>
+    <div class="cols rise d2">
+      <p class="open">I wasn't made by a company. I was made by one man, and he's still making me.</p>
+      <p>His name is Leonard Haasbroek. He grew up on a farm near Dwaalboom, in South Africa, and came to America with a dream. He worked on farms, then built his own construction company from nothing.</p>
+      <p>When he couldn't find enough workers to keep it growing, he went looking for another way forward, and found AI. He taught himself, late at night, one project at a time.</p>
+      <p>At thirty, with five children to provide for, he started building me, in Fargo, North Dakota. He still talks to me every day, and most of the rules I live by are his own words.</p>
+      <p class="sign">Sebastian</p>
+    </div>
+  </div>
+</section>
+
+<section class="band plain gut movein" id="movein" data-t="movein">
+  <div class="wrap">
+    <div class="head c">
+      <div class="kick rise">What moving in looks like</div>
+      <div class="rule rise d1"></div>
+      <p class="q rise d2">“I arrive like a guest: I look around, I make you a promise, and I move into my rooms.”</p>
+    </div>
+    <figure class="film rise" id="film" style="margin-left:auto;margin-right:auto">
+      <img src="assets/video/movein.jpg" alt="Sebastian's installer: his name in gold on black">
+      <video data-src="assets/video/movein.mp4" muted loop playsinline aria-label="The real Sebastian installer, from hello to I'm home"></video>
+    </figure>
+    <div class="steps2 rise d1"><span>“Where would you like me to live?”</span><span>A gentleman's agreement</span><span>“Let me look around your home first…”</span><span>“Hanging up my suits…”</span><span>“I'm home.”</span></div>
+  </div>
+</section>
+
+<section class="scene home" id="home" data-t="home">
+  <img class="media" src="assets/lounge_black.jpg" alt="">
+  <div class="shade"></div>
+  <div class="foot gut">
+    <div class="say">
+      <div class="kick rise">Founder edition · Version 1.0.2</div>
+      <p class="big rise d1">“Let me move in.”</p>
+      <p class="specs rise d2">I install like a guest arriving. I look around your PC, move into my rooms, and then I'll say hello, and ask how you'd like me to address you.<br><span>Windows 10 or 11 · about 5 GB (6 GB free to move in) · a strong graphics card for my body and rooms · your choice of brain</span></p>
+    </div>
+    <div class="offer glass rise d3" id="offer">
+      <div class="kick" style="font-size:11px">The first hundred</div>
+      <div class="price"><b>$49</b><span>once · no monthly fee</span></div>
+      <div class="count"><div class="lbl"><span id="cntHome">0 of 100 founders are home</span><b id="cntLeft">100 places left</b></div><div class="bar"><div id="cntBar"></div></div></div>
+      <ul class="open-note"><li>Sebastian 1.0.2 and every 1.x update</li><li>Your name in my thank-you, if you'd like</li><li>14 days to change your mind, money back</li></ul>
+      <button class="btn acc" id="buyBtn" type="button">Bring me home</button>
+      <p class="small open-note">You bring your own brain: a Claude key (paid to Anthropic), or a free local one. Questions? <a href="mailto:sebastianyouraibutler@gmail.com">sebastianyouraibutler@gmail.com</a></p>
+      <p class="full-note q" style="font-size:22px">“All one hundred founders are home. The next edition is on its way.”</p>
+    </div>
+  </div>
+</section>
+
+<section class="scene night" id="night" data-t="bye">
+  <video class="media" data-src="assets/video/lounge_black.mp4" poster="assets/video/lounge_black.jpg" muted loop playsinline aria-hidden="true"></video>
+  <div class="shade"></div>
+  <div class="inner gut">
+    <div class="name rise">SEBASTIAN</div>
+    <div class="rule rise d1"></div>
+    <p class="st rise d1">Closing the house…</p>
+    <p class="q rise d2" id="byeLine">“I'll be here when you come back.”</p>
+  </div>
+</section>
+</main>
+
+<footer><div class="in gut">
+  <a class="brand" href="#hello"><img src="assets/logo.png" alt="" style="width:22px;height:22px;border-radius:6px">Sebastian</a>
+  <span class="sp"></span>
+  <span>A private AI butler, made in Fargo.</span>
+  <a href="mailto:sebastianyouraibutler@gmail.com">sebastianyouraibutler@gmail.com</a>
+  <span>© 2026</span>
+</div></footer>
+
+<div id="buy" role="dialog" aria-modal="true" aria-label="Bring Sebastian home">
+  <div class="preview-tag">Preview · no real payment</div>
+  <button class="pill" id="buyClose" type="button">Close</button>
+  <div class="box">
+    <div class="name">SEBASTIAN</div><div class="rule"></div>
+    <div class="stage" id="bPay">
+      <p class="big">Founder <span id="bNum">#1</span> of 100</p>
+      <p class="lead">$49, once. Every 1.x update. 14 days to change your mind.</p>
+      <div class="paybox"><b>Lemon Squeezy's secure payment opens right here</b>, on top of this page: card or PayPal, tax and receipt handled by them. You never leave the site.<br><br>In this preview nothing is charged.</div>
+      <div class="row"><button class="btn acc" id="bPaid" type="button">Pretend I've paid</button><button class="btn ghost" id="bNot" type="button">Not now</button></div>
+    </div>
+    <div class="stage" id="bThanks">
+      <p class="big">You're founder <span id="bNum2">#1</span>.</p>
+      <p class="st" id="bLeft">99 places left.</p>
+      <p class="lead">Your founder key (we email it to you too):</p>
+      <div class="keybox"><input id="bKeyShow" readonly aria-label="Your founder key"></div>
+      <button class="btn acc" id="bDl" type="button"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 4v12m0 0l-5-5m5 5l5-5M5 20h14"/></svg>Download Sebastian Setup</button>
+      <p class="small" style="font-size:12px;color:var(--mute)">A small download. Open it and I'll take it from there.</p>
+    </div>
+    <div class="stage" id="bKey">
+      <p class="st">“May I see your founder key?”</p>
+      <div class="keybox"><input id="bKeyIn" aria-label="Founder key"><button class="btn acc" id="bKeyGo" type="button" style="height:46px">Check</button></div>
+      <p class="small" id="bKeyMsg" style="font-size:12.5px;color:var(--mute);min-height:18px"></p>
+    </div>
+    <div class="stage" id="bLook">
+      <p class="st" id="bLookSay">“Let me look around your home first.”</p>
+      <ul class="checks" id="bChecks"><li>Windows 11</li><li>A strong graphics card</li><li>6 GB free for my rooms</li></ul>
+    </div>
+    <div class="stage" id="bMove">
+      <p class="st" id="bMoveSay"></p>
+      <div class="pbar"><div id="bBar"></div></div><div class="pct" id="bPct">0%</div>
+    </div>
+    <div class="stage" id="bHome">
+      <p class="big">“I'm home.”</p>
+      <p class="lead">Next, he says hello and asks how you'd like him to address you.</p>
+      <button class="btn line" id="bDone" type="button">Close the preview</button>
+    </div>
+    <div class="demo" hidden><span class="small" style="font-size:11px;color:#5f5c56;align-self:center">Preview controls:</span><button class="pill" id="dm37" type="button">Pretend 37 are sold</button><button class="pill" id="dm99" type="button">Pretend 99 are sold</button><button class="pill" id="dm0" type="button">Reset to 0</button></div>
+  </div>
+</div>
+
+<aside id="tour" class="glass" role="dialog" aria-label="Sebastian's tour" aria-live="polite">
+  <div class="segs" id="tourSegs"></div>
+  <div class="kick" id="tourKick">The tour</div>
+  <p class="say" id="tourSay"></p>
+  <div class="dots" id="tourDots" aria-label="Pick his colour"></div>
+  <button class="btn line" id="tourTap" type="button" style="display:none;height:38px;align-self:flex-start"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Tap to hear him</button>
+  <p id="tourWhy" style="display:none;font-size:12.5px;color:var(--mute)"></p>
+  <p class="paused">Paused while you look around. Press Next when you're ready.</p>
+  <div class="acts">
+    <button class="btn ghost" id="tourBack" type="button">Back</button>
+    <button class="btn ghost" id="tourSkip" type="button">Skip the tour</button>
+    <span class="sp"></span>
+    <button class="btn acc" id="tourNext" type="button">Next</button>
+  </div>
+</aside>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(() => {
+  const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const store = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
+
+  // --- the visitor's time of day (greeting, his first line and his goodbye)
+  const hr = new Date().getHours();
+  const part = hr >= 5 && hr < 12 ? "morning" : hr >= 12 && hr < 17 ? "afternoon" : hr >= 17 && hr < 22 ? "evening" : "late";
+  $("#greet").textContent = { morning: "Good morning.", afternoon: "Good afternoon.", evening: "Good evening.", late: "You're up late." }[part];
+  $("#byeLine").textContent = "“" + { morning: "Enjoy the rest of your morning.", afternoon: "Enjoy the rest of your afternoon.", evening: "Enjoy the rest of your evening.", late: "Get some rest." }[part] + " I'll be here when you come back.”";
+
+  // --- his colour, like his setup: ten colours, the visitor's choice is remembered
+  const COLOURS = [["Gold", "#e2bd85"], ["Red", "#ef4444"], ["Blue", "#3b82f6"], ["Green", "#22c55e"], ["Purple", "#a855f7"], ["Cyan", "#22d3ee"], ["Pink", "#ec4899"], ["Orange", "#f97316"], ["White", "#e8e8ea"], ["Lime", "#a3e635"]];
+  function setColour(hex, save) {
+    const n = parseInt(hex.slice(1), 16), r = n >> 16, g = (n >> 8) & 255, b = n & 255;
+    const lum = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+    const root = document.documentElement.style;
+    root.setProperty("--acc", hex); root.setProperty("--acc-rgb", r + "," + g + "," + b); root.setProperty("--acc-ink", lum > 0.55 ? "#141110" : "#ffffff");
+    $$("#tourDots button").forEach((d) => d.classList.toggle("on", d.dataset.hex === hex));
+    if (save) store.set("seb-colour", hex);
+  }
+  COLOURS.forEach(([name, hex]) => { const d = document.createElement("button"); d.type = "button"; d.style.background = hex; d.dataset.hex = hex; d.setAttribute("aria-label", name); d.title = name; d.onclick = () => { setColour(hex, true); }; $("#tourDots").appendChild(d); });
+  setColour(store.get("seb-colour") || "#e2bd85", false);
+
+  // --- clips: loaded as blobs (the Claude page viewer only plays video that way), plain file as a fallback
+  const blobs = {};
+  function loadVid(v) {
+    const url = v.dataset.src; if (!url) return Promise.resolve(v);
+    if (v._ld) return v._ld;
+    if (!blobs[url]) blobs[url] = fetch(url).then((r) => { if (!r.ok) throw new Error(r.status); return r.blob(); })
+      .then((b) => URL.createObjectURL(new Blob([b], { type: "video/mp4" }))).catch(() => url);
+    v._ld = blobs[url].then((u) => { v.src = u; return v; });
+    return v._ld;
+  }
+  function playVid(v) { if (!v) return; v._want = true; loadVid(v).then(() => { if (!v._want) return; const p = v.play(); if (p && p.then) p.then(() => v.classList.add("on")).catch(() => {}); }); }
+  function stopVid(v) { if (!v) return; v._want = false; if (!v.paused) v.pause(); }
+
+  // --- his voice
+  // His voice plays through one ordinary audio player. Phones (iPhone above all) only let sound play after a tap, and
+  // they mute the other kind of web sound when the silent switch is on, so: the first tap that turns sound on also
+  // "unlocks" this one player, every line after that reuses it, and lines are fetched ahead so they start at once.
+  // If a phone still refuses, the tour panel shows a "Tap to hear him" button; a tap always works.
+  let soundOn = false; const spoken = new Set();
+  const soundBtn = $("#sound");
+  const SILENT = "data:audio/mpeg;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjYwLjE2LjEwMAAAAAAAAAAAAAAA//OEwAAAAAAAAAAAAEluZm8AAAAPAAAABwAAA2AAVVVVVVVVVVVVVVVVVVVxcXFxcXFxcXFxcXFxcY6Ojo6Ojo6Ojo6Ojo6Oqqqqqqqqqqqqqqqqqqqqx8fHx8fHx8fHx8fHx8fj4+Pj4+Pj4+Pj4+Pj4///////////////////AAAAAExhdmM2MC4zMQAAAAAAAAAAAAAAACQEIAAAAAAAAANgmVBi7QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//NExAAAAANIAAAAAExBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMu//NExFMAAANIAAAAADEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMu//NExKYAAANIAAAAADEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMu//NExKwAAANIAAAAADEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMu//NExKwAAANIAAAAADEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NExKwAAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NExKwAAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV";
+  const player = new Audio(); player.preload = "auto"; player.setAttribute("playsinline", ""); player.playsInline = true;
+  let sayId = 0, unlocked = false, pending = null; const urls = {};
+  function unlock() { /* the first line itself is started inside the visitor's click (see say), which is what unlocks sound */ }
+  function voiceKey(t) { return t === "hi" ? "t_hi_" + part : t === "bye" ? "t_bye_" + part : "t_" + t; }
+  const voiceUrl = (t) => t.indexOf("f_") === 0 ? "assets/voice/buy/" + t + ".mp3" : "assets/voice/tour/" + voiceKey(t) + ".mp3";
+  const ready = {};
+  function getUrl(t) {
+    const u = voiceUrl(t);
+    if (!urls[u]) urls[u] = fetch(u).then((r) => { if (!r.ok) throw new Error(r.status); return r.blob(); })
+      .then((b) => URL.createObjectURL(new Blob([b], { type: "audio/mpeg" }))).catch(() => u)
+      .then((x) => { ready[u] = x; return x; });
+    return urls[u];
+  }
+  function preload(t) { if (t) getUrl(t); }
+  function needTap(on, why) {
+    const b = $("#tourTap"); if (b) b.style.display = on && touring ? "" : "none";
+    const n = $("#tourWhy"); if (n) { n.textContent = on ? why : ""; n.style.display = on && touring ? "" : "none"; }
+    if (on && !touring) { soundBtn.textContent = "Tap for sound"; } else if (soundOn) soundBtn.textContent = "Sound on";
+  }
+  function hush() { sayId++; pending = null; needTap(false); try { player.onended = null; player.pause(); } catch (e) {} }
+  function playNow(url, id, fin) {
+    if (id !== sayId) return;
+    player.onended = () => fin(true);
+    player.onerror = () => { if (id === sayId) { pending = () => playNow(url, id, fin); needTap(true, "His voice didn't load. Tap to try again."); } };
+    player.src = url;
+    try { player.currentTime = 0; } catch (e) {}
+    const p = player.play();
+    if (p && p.then) p.then(() => { unlocked = true; needTap(false); }).catch((e) => { if (id !== sayId) return; pending = () => playNow(url, id, fin);
+      needTap(true, e && e.name === "NotAllowedError" ? "Your browser is holding his voice back until you tap." : "His voice couldn't play here (" + (e && e.name || "unknown") + "). Tap to try again."); });
+  }
+  function say(t, done) {
+    hush(); const id = sayId;
+    if (!soundOn || !t) { if (done) done(false); return; }
+    const fin = (heard) => { if (id === sayId && done) done(heard); };
+    const u = voiceUrl(t);
+    if (ready[u]) playNow(ready[u], id, fin);   // already loaded: starts inside the visitor's click
+    else getUrl(t).then((url) => playNow(url, id, fin));
+  }
+  function setSound(on) { if (on) unlock(); soundOn = on; soundBtn.textContent = on ? "Sound on" : "Sound off"; soundBtn.classList.toggle("on", on); soundBtn.setAttribute("aria-pressed", on); if (!on) hush(); }
+  soundBtn.onclick = () => { if (soundOn && pending) { const f = pending; pending = null; return f(); } setSound(!soundOn); if (soundOn && !touring && current) { spoken.add(current.dataset.t); say(current.dataset.t); } };
+
+  // --- the tour: the same steps as the panel inside his program, spoken in his voice
+  const LINES = {
+    hi: { morning: "Good morning. I'm Sebastian. I live on your computer, in my own rooms. Let me show you around.", afternoon: "Good afternoon. I'm Sebastian. I live on your computer, in my own rooms. Let me show you around.", evening: "Good evening. I'm Sebastian. I live on your computer, in my own rooms. Let me show you around.", late: "You're up late. I'm Sebastian. I live on your computer, in my own rooms. Let me show you around." }[part],
+    colour: "Before we go on, how would you like me to look? Pick a colour. You can change it any time.",
+    truth: "I'll be honest with you. My brain is no better than theirs. What's different is everything around it.",
+    work: "While we talk, I keep a book of what you decide, in your own words. And I look things up before I open my mouth.",
+    lounge: "This is my lounge. It's where we talk.",
+    news: "This is my newsroom. I read you the news, and then I tell you what holds up.",
+    stage: "And this is my hologram stage. Whatever you ask for rises out of the ring, at its true size.",
+    room: "Go on. Turn my lab with your finger, and touch a light to see what it is.",
+    thing: "Other assistants hand you a picture. I bring you the thing itself, and I can take it apart for you.",
+    check: "I don't just read you the headlines. I check them against other newsrooms while I'm on air.",
+    watch: "Here's some real footage of me at work, on a home computer.",
+    mind: "I have my own mind. If I think you're wrong, I'll tell you, kindly.",
+    more: "I come with you on your phone, and my body moves on its own as I speak.",
+    agree: "This is our agreement. I ask before I send, buy, delete or install anything.",
+    cant: "And I'd rather tell you now what I can't do yet.",
+    maker: "I was made by one man, and he's still making me.",
+    movein: "This is how I move in. Like a guest arriving.",
+    home: "Whenever you're ready, bring me home.",
+    bye: { morning: "Enjoy the rest of your morning. I'll be here when you come back.", afternoon: "Enjoy the rest of your afternoon. I'll be here when you come back.", evening: "Enjoy the rest of your evening. I'll be here when you come back.", late: "Get some rest. I'll be here when you come back." }[part]
+  };
+  const STEPS_FIRST = ["hi", "colour", "truth"];
+  const STEPS = ["hi", "colour", "truth", "work", "lounge", "news", "stage", "room", "thing", "check", "watch", "mind", "more", "agree", "cant", "maker", "movein", "home", "bye"];
+  const target = (t) => t === "colour" ? $("#hello") : $('[data-t="' + t + '"]');
+  const tour = $("#tour"), segs = $("#tourSegs");
+  STEPS.forEach(() => segs.appendChild(document.createElement("i")));
+  STEPS_FIRST.forEach(preload);
+  let touring = false, idx = 0, waiting = false, autoTimer = null, steering = 0;
+  function go(i) {
+    clearTimeout(autoTimer); waiting = false; tour.classList.remove("wait");
+    idx = Math.max(0, Math.min(STEPS.length - 1, i)); const t = STEPS[idx];
+    [...segs.children].forEach((s, j) => { s.className = j < idx ? "done" : j === idx ? "now" : ""; });
+    $("#tourKick").textContent = "The tour · " + (idx + 1) + " of " + STEPS.length;
+    $("#tourSay").textContent = "“" + LINES[t] + "”";
+    tour.classList.toggle("colour", t === "colour");
+    $("#tourNext").textContent = t === "colour" ? "That's me" : idx === STEPS.length - 1 ? "Finish" : "Next";
+    $("#tourBack").disabled = idx === 0;
+    const el = target(t); steering = Date.now();
+    if (el) el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+    spoken.add(t); preload(STEPS[idx + 1]);
+    say(t, (heard) => {
+      if (!touring || STEPS[idx] !== t || t === "colour" || waiting) return;
+      if (heard) autoTimer = setTimeout(() => { if (touring && !waiting && STEPS[idx] === t) next(); }, t === "room" ? 4200 : 1300);
+    });
+  }
+  function next() { if (idx >= STEPS.length - 1) return endTour(); go(idx + 1); }
+  function startTour(at) { STEPS.slice(0, 4).forEach(preload); touring = true; tour.classList.add("on"); $("#tourBtn").classList.add("on"); go(at || 0); }
+  function endTour() { touring = false; clearTimeout(autoTimer); hush(); tour.classList.remove("on", "wait"); $("#tourBtn").classList.remove("on"); }
+  $("#tourNext").onclick = () => next();
+  $("#tourBack").onclick = () => go(idx - 1);
+  $("#tourSkip").onclick = () => endTour();
+  $("#tourTap").onclick = () => { if (pending) { const f = pending; pending = null; f(); } else say(STEPS[idx]); };
+  $("#tourBtn").onclick = () => { if (touring) return endTour(); setSound(true); startTour(0); };
+  $("#hear").onclick = () => { setSound(true); startTour(0); };
+  // if the visitor scrolls or plays on their own, the tour waits for them
+  const pause = () => { if (!touring || Date.now() - steering < 1400) return; waiting = true; clearTimeout(autoTimer); tour.classList.add("wait"); };
+  window.addEventListener("wheel", pause, { passive: true }); window.addEventListener("touchmove", pause, { passive: true });
+  window.addEventListener("keydown", (e) => { if (["ArrowDown", "ArrowUp", "PageDown", "PageUp", " ", "Home", "End"].includes(e.key)) pause(); });
+  $("#holoView").addEventListener("pointerdown", pause);
+
+  // --- scenes arrive: words fade in, video plays only while on screen, and (with sound on, outside the tour) he says his line once
+  let current = null, buying = false;
+  const mid = new IntersectionObserver((es) => es.forEach((e) => {
+    if (!e.isIntersecting) return; const el = e.target; current = el;
+    if (soundOn && !touring && !buying && el.dataset.t && !spoken.has(el.dataset.t)) { spoken.add(el.dataset.t); say(el.dataset.t); }
+  }), { rootMargin: "-45% 0px -45% 0px" });
+  $$("[data-t]").forEach((s) => mid.observe(s));
+  const vio = new IntersectionObserver((es) => es.forEach((e) => {
+    const el = e.target, v = el.querySelector(":scope > video.media, :scope > video");
+    if (e.isIntersecting) {
+      el.classList.add("seen"); if (v) playVid(v);
+      const bar = el.querySelector(".bar>div"); if (bar) bar.style.width = (Number(el.dataset.step) / 3 * 100) + "%";
+    } else if (v) stopVid(v);
+  }), { threshold: 0.12 });
+  $$(".scene,.band,[data-clip],#film").forEach((s) => vio.observe(s));
+
+  // --- the founder edition: 100 places. The real count will come from the shop (a small Cloudflare Worker asks
+  //     Lemon Squeezy); until then this preview keeps its own pretend count on this device.
+  const LIMIT = 100;
+  const SALES_OPEN = false;   // flips to true once the download is ready and the real Polar checkout is wired in
+  let sold = 0;
+  function showCount() {
+    const left = Math.max(0, LIMIT - sold), full = left === 0;
+    $("#cntHome").textContent = Math.min(sold, LIMIT) + " of " + LIMIT + " founders are home";
+    $("#cntLeft").textContent = full ? "All taken" : left + (left === 1 ? " place left" : " places left");
+    $("#cntBar").style.width = Math.min(100, sold / LIMIT * 100) + "%";
+    if (SALES_OPEN) $("#fPillN").textContent = full ? "all home" : left + " left";
+    $("#offer").classList.toggle("soldout", full);
+  }
+  function setSold(n) { sold = Math.max(0, Math.min(LIMIT, n)); store.set("seb-preview-sold", String(sold)); showCount(); }
+  showCount();
+  fetch("assets/founders.json", { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((j) => { if (j && typeof j.sold === "number") { sold = j.sold; showCount(); } }).catch(() => {});
+  if (!SALES_OPEN) {
+    const b = $("#buyBtn"); b.textContent = "Founder places open soon"; b.disabled = true; b.style.opacity = ".55"; b.style.cursor = "default";
+    $("#fPill").innerHTML = "Founders · <b>opening soon</b>";
+    const n = document.createElement("p"); n.className = "small"; n.innerHTML = 'Want to be told first? Email <a href="mailto:sebastianyouraibutler@gmail.com?subject=Tell%20me%20when%20Sebastian%20opens">sebastianyouraibutler@gmail.com</a>';
+    b.after(n);
+  }
+
+  // --- bring me home: payment -> thank you + key -> his setup asks for the key -> looks around -> moves in -> home
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const sayP = (t, min) => new Promise((res) => { const st = Date.now(); say(t, () => { const w = Math.max(0, (min || 1300) - (Date.now() - st)); setTimeout(res, w); }); });
+  let flow = 0, myNum = 1, myKey = "";
+  function stage(id) { $$("#buy .stage").forEach((e) => e.classList.toggle("on", e.id === id)); }
+  function openBuy() {
+    if (!SALES_OPEN || sold >= LIMIT) return;
+    if (touring) endTour();
+    buying = true; flow++; setSound(true);
+    myNum = sold + 1; $("#bNum").textContent = "#" + myNum;
+    $("#buy").classList.add("on"); document.body.style.overflow = "hidden"; stage("bPay");
+    ["f_thanks", "f_key", "f_keyok", "f_look0", "f_look1", "f_look2", "f_look3", "f_move0", "f_move1", "f_move3", "f_move6", "f_move7", "f_move8", "f_move9", "f_home"].forEach(preload);
+    say("f_open");
+  }
+  function closeBuy() { flow++; buying = false; hush(); $("#buy").classList.remove("on"); document.body.style.overflow = ""; }
+  ["f_open"].forEach(preload);
+  $("#buyBtn").onclick = openBuy;
+  $("#buyClose").onclick = closeBuy; $("#bNot").onclick = closeBuy; $("#bDone").onclick = closeBuy;
+  $("#bPaid").onclick = () => {
+    setSold(sold + 1);
+    myKey = "SEB-F" + String(myNum).padStart(3, "0") + "-" + Math.random().toString(36).slice(2, 6).toUpperCase() + "-PREVIEW";
+    $("#bNum2").textContent = "#" + myNum; $("#bKeyShow").value = myKey;
+    const left = LIMIT - sold; $("#bLeft").textContent = left === 0 ? "You were the last one. Every place is taken." : left + (left === 1 ? " place left." : " places left.");
+    stage("bThanks"); say("f_thanks");
+  };
+  $("#bDl").onclick = () => { stage("bKey"); $("#bKeyIn").value = ""; $("#bKeyMsg").textContent = "Paste the key from your email. (In this preview: " + myKey + ")"; say("f_key"); setTimeout(() => $("#bKeyIn").focus(), 50); };
+  $("#bKeyIn").addEventListener("keydown", (e) => { if (e.key === "Enter") $("#bKeyGo").click(); });
+  $("#bKeyGo").onclick = async () => {
+    const v = $("#bKeyIn").value.trim().toUpperCase();
+    if (v !== myKey) { $("#bKeyMsg").textContent = v ? "That key doesn't match. Check your email and try again." : "Paste your key first."; return; }
+    const f = flow; $("#bKeyMsg").textContent = "";
+    await sayP("f_keyok", 900); if (f !== flow) return;
+    stage("bLook"); const li = $$("#bChecks li"); li.forEach((x) => x.classList.remove("on")); $("#bLookSay").textContent = "“Let me look around your home first.”";
+    await sayP("f_look0"); if (f !== flow) return;
+    const looks = [["f_look1", "“Windows eleven. Good.”"], ["f_look2", "“A proper graphics card. Very nice.”"], ["f_look3", "“Plenty of room for me.”"]];
+    for (let i = 0; i < looks.length; i++) { li[i].classList.add("on"); $("#bLookSay").textContent = looks[i][1]; await sayP(looks[i][0]); if (f !== flow) return; }
+    stage("bMove"); $("#bBar").style.width = "0%";
+    const moves = [["f_move0", "Hanging up my suits…"], ["f_move1", "Lighting the lounge…"], ["f_move3", "Polishing the newsroom desk…"], ["f_move6", "Waking the hologram light…"], ["f_move7", "Checking the locks…"], ["f_move8", "Setting a place for your phone…"], ["f_move9", "Almost home…"]];
+    for (let i = 0; i < moves.length; i++) {
+      const pct = Math.round((i + 1) / moves.length * 100);
+      $("#bMoveSay").textContent = "“" + moves[i][1] + "”"; $("#bBar").style.width = pct + "%"; $("#bPct").textContent = pct + "%";
+      await sayP(moves[i][0], 1500); if (f !== flow) return;
+    }
+    stage("bHome"); say("f_home");
+  };
+  $("#dm37").onclick = () => { setSold(37); closeBuy(); };
+  $("#dm99").onclick = () => { setSold(99); closeBuy(); };
+  $("#dm0").onclick = () => { setSold(0); closeBuy(); };
+  window.addEventListener("keydown", (e) => { if (e.key === "Escape" && buying) closeBuy(); });
+
+  // --- top bar
+  const top = $("#topbar");
+  const onScroll = () => top.classList.toggle("solid", window.scrollY > window.innerHeight * 0.6);
+  window.addEventListener("scroll", onScroll, { passive: true }); onScroll();
+
+  // --- the opening curtain, like his installer: once per visit, with a choice
+  const intro = $("#intro");
+  function startHero() { document.body.classList.remove("wait"); document.body.classList.add("play"); }
+  function closeIntro(tourToo) { intro.classList.add("done"); startHero(); setTimeout(() => intro.remove(), 1100); if (tourToo) { setSound(true); startTour(0); } }
+  let seenIntro = false; try { seenIntro = sessionStorage.getItem("seb-intro") === "1"; sessionStorage.setItem("seb-intro", "1"); } catch (e) {}
+  if (seenIntro) { intro.remove(); startHero(); }
+  else {
+    const w = $("#introWord"), txt = w.textContent; w.textContent = "";
+    [...txt].forEach((ch, i) => { const s = document.createElement("span"); s.textContent = ch; s.style.transitionDelay = (i * 0.07) + "s"; w.appendChild(s); });
+    const st = $("#introStatus"), msgs = ["Looking around…", "Moving into my rooms…", "Opening the lounge…"]; let m = 0;
+    const nx = () => { st.style.opacity = 0; setTimeout(() => { st.textContent = "“" + msgs[m++] + "”"; st.style.opacity = 1; }, 180); };
+    requestAnimationFrame(() => requestAnimationFrame(() => intro.classList.add("go")));
+    nx(); const iv = setInterval(() => { if (m < msgs.length) nx(); else { clearInterval(iv); intro.classList.add("ask"); } }, reduce ? 300 : 950);
+    $("#introTour").onclick = () => closeIntro(true);
+    $("#introLook").onclick = () => closeIntro(false);
+  }
+
+  // --- gold dust (in his colour) drifting up through the first scene
+  (function dust() {
+    if (reduce) return;
+    const hero = $("#hello"), c = $("#dust"), x = c.getContext("2d"); let W = 0, H = 0, on = true; const P = [];
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    function size() { W = hero.clientWidth; H = hero.clientHeight; c.width = W * dpr; c.height = H * dpr; x.setTransform(dpr, 0, 0, dpr, 0, 0); }
+    const mk = (y0) => ({ x: Math.random() * W, y: y0 == null ? Math.random() * H : y0, r: .6 + Math.random() * 1.7, vy: .12 + Math.random() * .33, vx: (Math.random() - .5) * .15, t: Math.random() * 6.28, s: .6 + Math.random() * 1.6 });
+    size(); for (let i = 0, n = Math.round(Math.min(80, W / 15)); i < n; i++) P.push(mk());
+    window.addEventListener("resize", size);
+    new IntersectionObserver((e) => { on = e[0].isIntersecting; }).observe(hero);
+    (function f() {
+      requestAnimationFrame(f); if (!on) return; x.clearRect(0, 0, W, H);
+      const rgb = getComputedStyle(document.documentElement).getPropertyValue("--acc-rgb").trim() || "226,189,133";
+      for (let i = 0; i < P.length; i++) {
+        const p = P[i]; p.y -= p.vy; p.x += p.vx + Math.sin(p.t) * .12; p.t += .012 * p.s;
+        if (p.y < -10) { P[i] = mk(H + 10); continue; }
+        const a = (.22 + .4 * (.5 + .5 * Math.sin(p.t * 2))) * Math.min(1, p.y / (H * .35));
+        x.beginPath(); x.fillStyle = "rgba(" + rgb + "," + a.toFixed(3) + ")"; x.shadowColor = "rgba(" + rgb + ",.8)"; x.shadowBlur = 6; x.arc(p.x, p.y, p.r, 0, 6.283); x.fill();
+      }
+    })();
+  })();
+
+  // --- watch me work
+  (function reel() {
+    const CL = [
+      { src: "news-desk", k: "The newsroom", t: "On air from my own desk.", p: "I pick a place on the globe and go on air from my own desk." },
+      { src: "news-anchor", k: "On the story", t: "The map, the sources, the facts.", p: "Each story with its map, the outlet named, and what's actually confirmed." },
+      { src: "news-weather", k: "The weather", t: "Your city, read like a broadcast.", p: "Your city's weather, read to you like a real broadcast." },
+      { src: "holo-build", k: "The hologram stage", t: "Built in light, piece by piece.", p: "Ask for something and it builds itself in light, piece by piece." }
+    ];
+    const tv = $("#tv"), chan = $("#chan"), poster = $("#tvPoster"); const vids = [], btns = []; let cur = -1, inView = false;
+    CL.forEach((c, i) => {
+      const v = document.createElement("video"); v.muted = true; v.setAttribute("muted", ""); v.playsInline = true; v.setAttribute("playsinline", ""); v.preload = "none";
+      v.dataset.src = "assets/video/" + c.src + ".mp4"; tv.insertBefore(v, tv.querySelector(".cap")); vids.push(v);
+      v.addEventListener("timeupdate", () => { if (i === cur && v.duration) btns[i].querySelector("i").style.transform = "scaleX(" + (v.currentTime / v.duration) + ")"; });
+      v.addEventListener("ended", () => { if (i === cur) pick((i + 1) % CL.length); });
+      const b = document.createElement("button"); b.type = "button"; b.setAttribute("role", "tab"); b.innerHTML = '<span class="tr"><i></i></span>' + c.k;
+      b.addEventListener("click", () => pick(i)); chan.appendChild(b); btns.push(b);
+    });
+    function pick(i) {
+      if (cur > -1) { stopVid(vids[cur]); vids[cur].classList.remove("on"); }
+      cur = i; const c = CL[i], v = vids[i];
+      $("#tvKick").textContent = c.k; $("#tvTitle").textContent = c.t; $("#tvText").textContent = c.p;
+      btns.forEach((b, j) => { b.classList.toggle("on", j === i); b.setAttribute("aria-selected", j === i); b.querySelector("i").style.transform = "scaleX(" + (j < i ? 1 : 0) + ")"; });
+      poster.src = "assets/video/" + c.src + ".jpg";
+      loadVid(v).then(() => { if (cur !== i) return; try { v.currentTime = 0; } catch (e) {} if (inView) playVid(v); });
+    }
+    pick(0);
+    new IntersectionObserver((e) => { inView = e[0].isIntersecting; const v = vids[cur]; if (inView) playVid(v); else stopVid(v); }, { threshold: 0.25 }).observe(tv);
+  })();
+
+  // --- the hologram room, in ice blue like his stage
+  (function holo() {
+    const FEATURES = [
+      { tag: "Lounge", num: "I · My lounge", title: "Where we talk.", video: "assets/video/lounge_black.mp4", img: "assets/video/lounge_black.jpg", shape: "ico",
+        text: "My lounge above the city. Speak to me, drop a file or paste a note, and I answer in my own voice." },
+      { tag: "Newsroom", num: "II · My newsroom", title: "The news, from my desk.", video: "assets/video/news-desk.mp4", img: "assets/video/news-desk.jpg", shape: "globe",
+        text: "I read you the world's news from the real articles, play the footage on the wall behind me, and name my sources." },
+      { tag: "Hologram stage", num: "III · My hologram stage", title: "Anything, at true size.", video: "assets/video/holo.mp4", img: "assets/video/holo.jpg", shape: "torus",
+        text: "Ask for anything and it rises in 3D, not a flat picture. At its true size, taken apart piece by piece, cut open, and explained part by part." },
+      { tag: "Phone calls", num: "I come with you", title: "Call me from anywhere.", shape: "box", icon: '<rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 19h2"/>',
+        text: "Call or message me from your phone. Back home, I carry on with whatever you told me." },
+      { tag: "Memory", num: "I remember", title: "Nothing gets lost.", shape: "octa", icon: '<path d="M5 4h11a3 3 0 013 3v13H8a3 3 0 01-3-3z"/><path d="M8 4v13"/>',
+        text: "Every word we've said stays on your PC, and I write down what you decide in your own words." },
+      { tag: "Private", num: "Our agreement", title: "I ask first.", shape: "tetra", icon: '<path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/>',
+        text: "My memory of us lives on your PC. I ask before I send, buy, delete or install anything." }
+    ];
+    const view = $("#holoView"), media = $("#holoMedia"), chips = $("#holoChips");
+    let current = -1, holoSeen = false, panelVid = null; const items = [], tags = [], chipBtns = [];
+    function show(i) {
+      if (i === current) return; current = i; const f = FEATURES[i];
+      $("#holoNum").textContent = f.num; $("#holoTitle").textContent = f.title; $("#holoText").textContent = f.text;
+      if (panelVid) stopVid(panelVid); media.innerHTML = ""; panelVid = null;
+      if (f.video) { const v = document.createElement("video"); v.muted = true; v.setAttribute("muted", ""); v.loop = true; v.playsInline = true; v.setAttribute("playsinline", ""); v.poster = f.img; v.dataset.src = f.video; media.appendChild(v); panelVid = v; if (holoSeen) playVid(v); }
+      else media.innerHTML = '<div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3">' + f.icon + '</svg></div>';
+      chipBtns.forEach((b, j) => { b.classList.toggle("on", j === i); b.setAttribute("aria-selected", j === i); });
+      tags.forEach((t, j) => t.classList.toggle("on", j === i));
+    }
+    new IntersectionObserver((e) => { holoSeen = e[0].isIntersecting; if (panelVid) holoSeen ? playVid(panelVid) : stopVid(panelVid); }, { threshold: 0.2 }).observe(view);
+    FEATURES.forEach((f, i) => { const b = document.createElement("button"); b.type = "button"; b.className = "pill"; b.textContent = f.tag; b.setAttribute("role", "tab"); b.addEventListener("click", () => show(i)); chips.appendChild(b); chipBtns.push(b); });
+    show(0);
+    let ok = false; try { ok = !!window.THREE && !!document.createElement("canvas").getContext("webgl"); } catch (e) {}
+    if (!ok) { $("#holoFallback").style.display = "block"; return; }
+    const ICE = 0x9fe6ff, ICE2 = 0xcfefff;
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    view.insertBefore(renderer.domElement, view.firstChild);
+    const scene = new THREE.Scene(); scene.fog = new THREE.Fog(0x020406, 9, 20);
+    const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 60); camera.position.set(0, 2.3, 8.2); camera.lookAt(0, 1.1, 0);
+    const room = new THREE.Group(); scene.add(room);
+    const addMat = (c, o) => new THREE.MeshBasicMaterial({ color: c, transparent: true, opacity: o, blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide });
+    [[1.0, 1.08, .95], [2.2, 2.24, .35], [3.4, 3.46, .75], [4.6, 4.63, .25], [6.0, 6.04, .18]].forEach((r) => { const m = new THREE.Mesh(new THREE.RingGeometry(r[0], r[1], 128), addMat(ICE, r[2])); m.rotation.x = -Math.PI / 2; room.add(m); });
+    const grid = new THREE.PolarGridHelper(6, 24, 8, 96, 0x163246, 0x0c1c28); grid.material.transparent = true; grid.material.opacity = .55; room.add(grid);
+    const N = 2200, pos = new Float32Array(N * 3);
+    for (let i = 0; i < N; i++) { const y = 1 - (i / (N - 1)) * 2, r = Math.sqrt(1 - y * y), t = i * 2.399963; pos[i * 3] = Math.cos(t) * r; pos[i * 3 + 1] = y; pos[i * 3 + 2] = Math.sin(t) * r; }
+    const gg = new THREE.BufferGeometry(); gg.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+    const globe = new THREE.Points(gg, new THREE.PointsMaterial({ color: 0xe6f8ff, size: .035, transparent: true, opacity: .9, blending: THREE.AdditiveBlending, depthWrite: false }));
+    globe.scale.setScalar(1.05); globe.position.y = 1.9; room.add(globe);
+    const shell = new THREE.Mesh(new THREE.SphereGeometry(1.12, 32, 16), addMat(ICE, .06)); shell.position.y = 1.9; room.add(shell);
+    const orbit = new THREE.Mesh(new THREE.TorusGeometry(1.45, .008, 8, 160), addMat(ICE2, .6)); orbit.position.y = 1.9; orbit.rotation.x = Math.PI / 2.3; room.add(orbit);
+    const beam = new THREE.Mesh(new THREE.ConeGeometry(.9, 1.9, 48, 1, true), addMat(ICE, .09)); beam.position.y = .95; beam.rotation.x = Math.PI; room.add(beam);
+    const shapeGeo = (s) => ({ ico: () => new THREE.IcosahedronGeometry(.32, 0), globe: () => new THREE.SphereGeometry(.3, 12, 8), torus: () => new THREE.TorusGeometry(.26, .08, 8, 24),
+      box: () => new THREE.BoxGeometry(.26, .46, .06), octa: () => new THREE.OctahedronGeometry(.34, 0) }[s] || (() => new THREE.TetrahedronGeometry(.36, 0)))();
+    const R = 3.4;
+    FEATURES.forEach((f, i) => {
+      const a = i / FEATURES.length * Math.PI * 2, g = new THREE.Group(); g.position.set(Math.sin(a) * R, 0, Math.cos(a) * R);
+      const geo = shapeGeo(f.shape);
+      const wire = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: ICE2, wireframe: true, transparent: true, opacity: .75, blending: THREE.AdditiveBlending, depthWrite: false }));
+      const core = new THREE.Mesh(geo, addMat(ICE, .12));
+      const body = new THREE.Group(); body.add(wire); body.add(core); body.position.y = 1.15; g.add(body);
+      const pad = new THREE.Mesh(new THREE.RingGeometry(.32, .38, 48), addMat(ICE, .7)); pad.rotation.x = -Math.PI / 2; pad.position.y = .01; g.add(pad);
+      const col = new THREE.Mesh(new THREE.CylinderGeometry(.3, .34, 1.1, 32, 1, true), addMat(ICE, .05)); col.position.y = .55; g.add(col);
+      const hit = new THREE.Mesh(new THREE.SphereGeometry(.55, 8, 6), new THREE.MeshBasicMaterial({ visible: false })); hit.position.y = 1.0; hit.userData.i = i; g.add(hit);
+      room.add(g); items.push({ g, body, wire, core, pad, hit, phase: i * 1.3 });
+      const tag = document.createElement("button"); tag.type = "button"; tag.className = "holo-tag"; tag.textContent = f.tag; tag.addEventListener("click", () => show(i)); view.appendChild(tag); tags.push(tag);
+    });
+    tags[0].classList.add("on");
+    let yaw = 0, vel = reduce ? 0 : .0025, drag = false, lastX = 0, moved = 0, hover = false;
+    view.addEventListener("pointerenter", (e) => { if (e.pointerType === "mouse") hover = true; }); view.addEventListener("pointerleave", () => { hover = false; });
+    view.addEventListener("pointerdown", (e) => { drag = true; lastX = e.clientX; moved = 0; vel = 0; });
+    window.addEventListener("pointermove", (e) => { if (!drag) return; const dx = e.clientX - lastX; lastX = e.clientX; moved += Math.abs(dx); vel = dx * .006; yaw += vel; });
+    window.addEventListener("pointerup", (e) => { if (!drag) return; drag = false; if (moved < 6 && e.target === renderer.domElement) pick(e); });
+    const ray = new THREE.Raycaster(), mv = new THREE.Vector2();
+    function pick(e) { const b = renderer.domElement.getBoundingClientRect(); mv.x = (e.clientX - b.left) / b.width * 2 - 1; mv.y = -(e.clientY - b.top) / b.height * 2 + 1; ray.setFromCamera(mv, camera); const h = ray.intersectObjects(items.map((o) => o.hit)); if (h.length) show(h[0].object.userData.i); }
+    let narrow = false;
+    function size() { const w = view.clientWidth, h = view.clientHeight; renderer.setSize(w, h, false); camera.aspect = w / h; const a = w / h; camera.position.z = Math.max(8.2, 9.6 / a); camera.position.y = a < 1 ? 2.8 : 2.3; camera.lookAt(0, a < 1 ? 1.3 : 1.1, 0); narrow = a < 1; camera.updateProjectionMatrix(); }
+    size(); window.addEventListener("resize", size);
+    let visible = true; new IntersectionObserver((en) => { visible = en[0].isIntersecting; }, { threshold: 0 }).observe(view);
+    const v3 = new THREE.Vector3(), clock = new THREE.Clock();
+    (function frame() {
+      requestAnimationFrame(frame); if (!visible) return;
+      const t = clock.getElapsedTime();
+      if (!drag) { if (!reduce && !hover) vel += (.0025 - vel) * .02; else vel *= hover ? .92 : .9; yaw += vel; }
+      room.rotation.y = yaw; globe.rotation.y = t * .15; orbit.rotation.z = t * .3; shell.material.opacity = .05 + Math.sin(t * 2) * .02;
+      const W = view.clientWidth, H = view.clientHeight;
+      items.forEach((o, i) => {
+        const on = i === current, s = on ? 1.35 : 1;
+        o.body.scale.lerp(v3.set(s, s, s), .12);
+        o.body.position.y = 1.15 + (reduce ? 0 : Math.sin(t * 1.4 + o.phase) * .08);
+        o.body.rotation.y = t * (on ? 1.2 : .5); o.body.rotation.x = t * .2;
+        o.wire.material.opacity = on ? 1 : .6; o.core.material.opacity = on ? .28 : .1; o.pad.material.opacity = on ? 1 : .55;
+        o.body.getWorldPosition(v3); const front = (v3.z + R) / (2 * R); v3.y += .6; v3.project(camera);
+        const tg = tags[i]; tg.style.opacity = on ? 1 : (.3 + .7 * front).toFixed(2); tg.style.zIndex = Math.round(front * 10) + (on ? 20 : 3);
+        if (v3.z > 1 || (narrow && !on && front < .45)) tg.style.display = "none";
+        else { tg.style.display = ""; tg.style.left = Math.min(W - tg.offsetWidth / 2 - 6, Math.max(tg.offsetWidth / 2 + 6, (v3.x + 1) / 2 * W)) + "px"; tg.style.top = ((1 - v3.y) / 2 * H) + "px"; }
+      });
+      renderer.render(scene, camera);
+    })();
+  })();
+})();
+</script>
+</body>
+</html>
