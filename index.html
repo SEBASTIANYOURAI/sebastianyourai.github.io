@@ -971,13 +971,36 @@ footer .sp{flex-grow:1}
       clearTimeout(slow); let paid = false;
       if (f === flow) $("#bOpenMsg").textContent = "Your payment is open. Polar, our shop, handles the card and the receipt.";
       // stay on Polar's own receipt after paying: it shows the founder key with a Copy button
-      co.addEventListener("success", (e) => { paid = true; e.preventDefault(); });
+      // PAID_REMEMBERED (the owner, 7 Nov: "when I go back to the page it forgot I was there"): the purchase is remembered
+      // in this browser, so coming back to the site - however they come back - reopens the founder screen and download
+      co.addEventListener("confirmed", () => { store.set("seb-founder-paid", String(Date.now())); });
+      co.addEventListener("success", (e) => { paid = true; store.set("seb-founder-paid", String(Date.now())); e.preventDefault(); });
       co.addEventListener("close", () => { if (f !== flow) return; if (paid) { stage("bThanks"); say("f_thanks"); } else closeBuy(); });
     } catch (e) {
       clearTimeout(slow);
       if (f === flow) $("#bOpenMsg").innerHTML = 'The payment window couldn\'t open just now. Please try again in a moment, or email <a href="mailto:sebastianyouraibutler@gmail.com">sebastianyouraibutler@gmail.com</a>.';
     }
   }
+  function showFounder(voice) {
+    buying = true; flow++;
+    $("#buy").classList.add("on"); document.body.style.overflow = "hidden"; stage("bThanks");
+    if (voice) say("f_thanks");
+  }
+  // back on the site after paying (Polar's back button, a reload, or ?founder-welcome as the success address)
+  (function welcomeBack() {
+    const asked = /[?&](founder-welcome|checkout_id)=?/.test(location.search);
+    const t = Number(store.get("seb-founder-paid") || 0);
+    const recent = t && Date.now() - t < 24 * 3600 * 1000;
+    if (asked && !t) store.set("seb-founder-paid", String(Date.now()));
+    if (asked || recent) {
+      const go = () => { const i = $("#intro"); if (i) { i.classList.add("done"); setTimeout(() => i.remove(), 1000); } document.body.classList.remove("wait"); document.body.classList.add("play"); showFounder(false); };
+      if (document.readyState === "complete") setTimeout(go, 300); else window.addEventListener("load", () => setTimeout(go, 300));
+    }
+    if (recent || asked) {   // the offer box keeps a download link for founders
+      const b = $("#buyBtn"); const a = document.createElement("a"); a.className = "btn line"; a.textContent = "Download Sebastian Setup";
+      a.href = $("#bDl").getAttribute("href"); a.style.marginTop = "4px"; b.after(a);
+    }
+  })();
   function closeBuy() { flow++; buying = false; hush(); $("#buy").classList.remove("on"); document.body.style.overflow = ""; }
   ["f_open"].forEach(preload);
   $("#buyBtn").onclick = openBuy;
