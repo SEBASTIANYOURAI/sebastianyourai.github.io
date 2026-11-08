@@ -327,6 +327,13 @@ footer{background:#000;border-top:1px solid rgba(255,255,255,.06)}
 footer .in{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-block:28px;font-size:13px;color:var(--mute)}
 footer a{color:#a9a59c;text-decoration:none}footer a:hover{color:var(--acc)}
 footer .sp{flex-grow:1}
+/* SOCIAL (8 Nov, the owner: "the same way like Sebastian's icons ... a little bit bigger"): round smoked-glass buttons
+   with a gold glyph, like the buttons in his own window */
+footer .social{display:flex;gap:14px;width:100%;justify-content:center;padding-bottom:6px}
+footer .soc{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;color:var(--acc);
+  background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.012) 45%),rgba(8,8,9,.62);
+  border:1px solid rgba(var(--acc-rgb),.38);box-shadow:inset 0 1px 0 rgba(255,255,255,.06);transition:transform .2s,box-shadow .2s,border-color .2s}
+footer .soc:hover{color:var(--acc);border-color:rgba(var(--acc-rgb),.85);transform:translateY(-2px);box-shadow:0 0 22px rgba(var(--acc-rgb),.28),inset 0 1px 0 rgba(255,255,255,.08)}
 
 /* ---- his tour panel (the same panel as the tour inside his program) ---- */
 #tour{position:fixed;z-index:40;right:max(18px,env(safe-area-inset-right,0px));bottom:max(18px,env(safe-area-inset-bottom,0px));width:min(420px,calc(100vw - 36px));padding:16px 18px 16px;display:none;flex-direction:column;gap:12px}
@@ -382,7 +389,7 @@ footer .sp{flex-grow:1}
 <header class="top gut" id="topbar">
   <a class="brand" href="#hello"><img src="assets/logo.png" alt="">Sebastian</a>
   <span class="sp"></span>
-  <nav aria-label="Sections"><a href="#truth">Who I am</a><a href="#rooms">My rooms</a><a href="#newsroom">Newsroom</a><a href="#holograms">Holograms</a><a href="#watch">Watch me</a><a href="#maker">Who made me</a><a href="#home">Bring me home</a></nav>
+  <nav aria-label="Sections"><a href="#truth">Who I am</a><a href="#rooms">My rooms</a><a href="#newsroom">Newsroom</a><a href="#holograms">Holograms</a><a href="#watch">Watch me</a><a href="#maker">Who made me</a><a href="#home">Bring me home</a><a href="blog.html">Blog</a></nav>
   <a class="pill fpill getpill" href="#home" id="fPill">Founders · <b id="fPillN">100 left</b></a>
   <button class="pill" id="tourBtn" type="button"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Tour</button>
   <button class="pill" id="sound" type="button" aria-pressed="false">Sound off</button>
@@ -684,15 +691,18 @@ footer .sp{flex-grow:1}
 </main>
 
 <footer><div class="in gut">
+  <div class="social" aria-label="Follow Sebastian">
+    <a class="soc" href="https://www.facebook.com/sebastianyourai" target="_blank" rel="noopener" aria-label="Sebastian on Facebook" title="Sebastian on Facebook"><svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5h2.6l.4-3h-3v-1.9c0-.9.3-1.5 1.6-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.9v3h2.6V21h3z"/></svg></a>
+    <a class="soc" href="https://www.instagram.com/sebastianyouraibutler/" target="_blank" rel="noopener" aria-label="Sebastian on Instagram" title="Sebastian on Instagram"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+    <a class="soc" href="https://www.youtube.com/@SebastianAIButler" target="_blank" rel="noopener" aria-label="Sebastian on YouTube" title="Sebastian on YouTube"><svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 7.2a2.5 2.5 0 00-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 002.4 7.2C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 001.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 001.8-1.8c.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8zM10 15V9l5.2 3L10 15z"/></svg></a>
+    <a class="soc" href="https://www.tiktok.com/@sebastianbutler6" target="_blank" rel="noopener" aria-label="Sebastian on TikTok" title="Sebastian on TikTok"><svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 3c.3 2.2 1.7 3.8 3.9 4v3.1c-1.5 0-2.8-.4-3.9-1.1v6.3c0 3.4-2.7 5.7-5.8 5.7S5 18.7 5 15.4s2.6-5.8 5.9-5.6v3.2c-1.4-.2-2.7.8-2.7 2.4 0 1.4 1.1 2.5 2.5 2.5 1.6 0 2.6-1.1 2.6-2.8V3h3.3z"/></svg></a>
+  </div>
   <a class="brand" href="#hello"><img src="assets/logo.png" alt="" style="width:22px;height:22px;border-radius:6px">Sebastian</a>
   <span class="sp"></span>
   <span>A private AI butler, made in Fargo.</span>
   <a href="mailto:support@meetsebastianai.com">support@meetsebastianai.com</a>
   <a href="https://github.com/SEBASTIANYOURAI/sebastianyourai.github.io/releases/latest/download/Sebastian.Setup.exe">Founders: download Sebastian</a>
-  <a href="https://www.facebook.com/sebastianyourai" target="_blank" rel="noopener" aria-label="Sebastian on Facebook" style="display:inline-flex;align-items:center;gap:6px"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5h2.6l.4-3h-3v-1.9c0-.9.3-1.5 1.6-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.9v3h2.6V21h3z"/></svg>Facebook</a>
-  <a href="https://www.instagram.com/sebastianyouraibutler/" target="_blank" rel="noopener" aria-label="Sebastian on Instagram" style="display:inline-flex;align-items:center;gap:6px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>Instagram</a>
-  <a href="https://www.youtube.com/@SebastianAIButler" target="_blank" rel="noopener" aria-label="Sebastian on YouTube" style="display:inline-flex;align-items:center;gap:6px"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 7.2a2.5 2.5 0 00-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 002.4 7.2C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 001.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 001.8-1.8c.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8zM10 15V9l5.2 3L10 15z"/></svg>YouTube</a>
-  <a href="https://www.tiktok.com/@sebastianbutler6" target="_blank" rel="noopener" aria-label="Sebastian on TikTok" style="display:inline-flex;align-items:center;gap:6px"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 3c.3 2.2 1.7 3.8 3.9 4v3.1c-1.5 0-2.8-.4-3.9-1.1v6.3c0 3.4-2.7 5.7-5.8 5.7S5 18.7 5 15.4s2.6-5.8 5.9-5.6v3.2c-1.4-.2-2.7.8-2.7 2.4 0 1.4 1.1 2.5 2.5 2.5 1.6 0 2.6-1.1 2.6-2.8V3h3.3z"/></svg>TikTok</a>
+  <a href="blog.html">Blog</a>
   <a href="terms.html">Terms</a>
   <a href="privacy.html">Privacy</a>
   <a href="refunds.html">Refunds</a>
