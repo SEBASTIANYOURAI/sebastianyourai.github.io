@@ -73,6 +73,7 @@ section{scroll-margin-top:64px}
 .band{position:relative;isolation:isolate;padding:110px 0}
 .band.lounge::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(9,9,10,.94),rgba(9,9,10,.82) 45%,rgba(9,9,10,.95)),url(assets/lounge_black.jpg) center/cover no-repeat}
 .band.plain{background:var(--bg)}
+.band.gut:not(.maker){padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}   /* PHONE_GUTTER (8 Nov): .band's own padding wiped the side gutter - text touched the screen edge on phones */
 
 /* ---- opening curtain ---- */
 #intro{position:fixed;inset:0;z-index:60;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;transition:opacity 1s ease;text-align:center;padding:24px}
@@ -243,6 +244,8 @@ section{scroll-margin-top:64px}
 /* ---- what I can't do yet ---- */
 .cant{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 @media(max-width:700px){.cant{grid-template-columns:minmax(0,1fr)}}
+.soonvid{width:100%;display:block;border-radius:16px;border:1px solid rgba(var(--acc-rgb),.3);background:#000}
+.soonnote{font-size:13px;color:var(--mute);margin-top:12px}
 .cant li{padding:18px 20px;border-radius:12px;border:1px dashed rgba(var(--acc-rgb),.32);background:rgba(8,8,9,.55);font-size:15px;line-height:1.6;color:var(--body)}
 
 /* ---- the man who made me ---- */
@@ -624,6 +627,14 @@ footer .soc:hover{color:var(--acc);border-color:rgba(var(--acc-rgb),.85);transfo
       <li>On the phone, away from home, I don't have my own voice yet, and I can't ring you when the app is closed.</li>
       <li>I can't change my own code or build my own rooms. The man who made me does that.</li>
     </ul>
+  </div>
+</section>
+
+<section class="band plain gut" id="soon">
+  <div class="wrap">
+    <div class="head"><div class="kick rise">Coming later</div><h2 class="h rise d1">Next, I become the computer.</h2><p class="lead rise d2">Today I live in my own room on your computer. One day I'd like to be the computer: you talk, and I write the code, run the tests and make the calls to my helpers, all in plain sight.</p></div>
+    <video class="soonvid rise d2" src="assets/video/sebastian-os-concept.mp4" poster="assets/video/sebastian-os-concept.jpg" controls playsinline preload="none" aria-label="Sebastian OS - a concept film, narrated by Sebastian"></video>
+    <p class="soonnote">Sebastian OS is an early concept, not something you can buy yet. <a href="blog-sebastian-os-coming.html">Read more</a>.</p>
   </div>
 </section>
 
