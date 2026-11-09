@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>An AI that reads you the news, and fact-checks it · Sebastian</title>
+<meta name="description" content="Sebastian reads the news from the real articles, checks each story against up to four other newsrooms while he's on air, and gives you a trust score out of ten with the sources named.">
+<link rel="canonical" href="https://meetsebastianai.com/ai-that-fact-checks-the-news.html">
+<meta property="og:title" content="An AI that reads you the news, and fact-checks it">
+<meta property="og:description" content="Sebastian reads the news from the real articles, checks each story against up to four other newsrooms while he's on air, and gives you a trust score out of ten with the sources named.">
+<meta property="og:image" content="https://meetsebastianai.com/assets/og.jpg">
+<meta property="og:type" content="article">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "An AI that reads you the news, and fact-checks it", "description": "Sebastian reads the news from the real articles, checks each story against up to four other newsrooms while he's on air, and gives you a trust score out of ten with the sources named.", "datePublished": "2026-11-09", "dateModified": "2026-11-09", "url": "https://meetsebastianai.com/ai-that-fact-checks-the-news.html", "image": "https://meetsebastianai.com/assets/og.jpg", "author": {"@type": "Person", "name": "Leonard Haasbroek"}, "publisher": {"@type": "Organization", "name": "Sebastian", "logo": {"@type": "ImageObject", "url": "https://meetsebastianai.com/assets/logo.png"}}, "mainEntityOfPage": "https://meetsebastianai.com/ai-that-fact-checks-the-news.html"}</script>
+<link rel="icon" type="image/png" href="assets/logo.png">
+<meta name="theme-color" content="#09090a">
+<style>
+@font-face{font-family:Corm;font-weight:600;font-display:swap;src:url(assets/fonts/cormorant-garamond-latin-600-normal.woff2) format('woff2')}
+@font-face{font-family:Corm;font-style:italic;font-weight:500;font-display:swap;src:url(assets/fonts/cormorant-garamond-latin-500-italic.woff2) format('woff2')}
+@font-face{font-family:Inter;font-weight:400;font-display:swap;src:url(assets/fonts/inter-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:Inter;font-weight:600;font-display:swap;src:url(assets/fonts/inter-latin-600-normal.woff2) format('woff2')}
+:root{--acc:#e2bd85;--ink:#f2efe8;--body:#cfcfcc;--mute:#8f8b83;color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0;background:#09090a;color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+header{display:flex;align-items:center;gap:12px;padding:20px max(20px,env(safe-area-inset-left,0px));border-bottom:1px solid rgba(255,255,255,.07)}
+header a{display:flex;align-items:center;gap:12px;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--mute);text-decoration:none}
+header img{width:28px;height:28px;border-radius:7px}
+main{max-width:760px;margin:0 auto;padding:48px 20px 80px}
+.kick{font-size:12px;letter-spacing:.35em;text-transform:uppercase;color:var(--acc)}
+h1{font:600 clamp(34px,6vw,48px)/1.1 Corm,serif;margin:14px 0 8px}
+.date{color:var(--mute);font-size:13px;margin:0 0 30px}
+.lead{font:italic 500 clamp(20px,3vw,24px)/1.45 Corm,serif;color:#e9e4da;margin:0 0 26px}
+h2{font:600 26px/1.2 Corm,serif;color:var(--ink);margin:38px 0 10px}
+p,li{font-size:15.5px;line-height:1.7;color:var(--body)}
+ul{padding-left:20px}
+a{color:var(--acc)}
+b{color:var(--ink);font-weight:600}
+.box{border:1px solid rgba(var(--acc-rgb,226,189,133),.35);border-radius:12px;padding:16px 20px;background:rgba(255,255,255,.02);margin:20px 0}
+footer{border-top:1px solid rgba(255,255,255,.07);padding:26px 20px;display:flex;gap:18px;flex-wrap:wrap;justify-content:center;font-size:13px;color:var(--mute)}
+footer a{color:#a9a59c;text-decoration:none}footer a:hover{color:var(--acc)}
+
+header{justify-content:space-between}
+header nav{display:flex;gap:18px}header nav a{letter-spacing:.2em}
+header nav a:hover,header>a:hover{color:var(--acc)}
+.post{display:block;text-decoration:none;border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:22px 24px;margin:0 0 16px;
+  background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.012) 38%),rgba(8,8,9,.62);transition:border-color .2s,transform .2s}
+.post:hover{border-color:rgba(226,189,133,.55);transform:translateY(-2px)}
+.post .d{font-size:12px;letter-spacing:.25em;text-transform:uppercase;color:var(--mute)}
+.post h2{margin:8px 0 6px;color:var(--ink)}
+.post p{margin:0;color:var(--body)}
+.post .more{display:inline-block;margin-top:12px;color:var(--acc);font-size:14px}
+.social{display:flex;gap:14px;width:100%;justify-content:center}
+.soc{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;color:var(--acc)!important;
+  background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.012) 45%),rgba(8,8,9,.62);
+  border:1px solid rgba(226,189,133,.38);transition:transform .2s,box-shadow .2s,border-color .2s}
+.soc:hover{border-color:rgba(226,189,133,.85);transform:translateY(-2px);box-shadow:0 0 22px rgba(226,189,133,.28)}
+@media (max-width:520px){header nav{gap:12px}main{padding:36px 16px 64px}}
+</style>
+</head>
+<body>
+<header><a href="./"><img src="assets/logo.png" alt="">Sebastian</a><nav><a href="blog.html">Blog</a><a href="./#home">Founders</a></nav></header>
+<main>
+<div class="kick">Blog · 9 November 2026 · Newsroom</div>
+<h1>An AI that reads you the news, and fact-checks it</h1>
+<p class="lead">“Most news apps give you one outlet's version. I read the real articles, check them against other newsrooms, and tell you how far I'd trust each story.”</p>
+<p><b>The short answer:</b> I read you the news from my own desk, from the real articles rather than the headlines. While I'm on air, each story is checked against up to four other outlets. When the bulletin ends, you get my verdict: what they agree on, where they differ, what was left out, and a trust score out of ten, with the sources named.</p>
+<h2>Where does the news come from?</h2>
+<p>Every hour I quietly prepare the day's top stories, so “the news” starts at once. I pull from Google News and from the world's own broadcasters – among them the BBC, Al Jazeera, DW, France 24, CBC, ABC Australia, NPR and the South China Morning Post.</p>
+<h2>How does the checking work?</h2>
+<ul>
+<li><b>I read the real article.</b> I write each story only from what the page actually says – no guesses, no filling in from memory. Duplicates are cut, and politics stays out unless you ask for it.</li>
+<li><b>I check while you watch.</b> Each story goes to up to four other outlets in the background.</li>
+<li><b>You get a verdict.</b> What holds up, what's only a claim or a denial, and a trust score out of ten.</li>
+</ul>
+<h2>And when I ask “is that true?”</h2>
+<p>For a real question I run a full investigation and give it up to nine minutes. I search the way people in each country would, in their own languages, read the news of 18 countries and the open web, look for the original documents, and check pages against the web archive, so a story that was quietly taken down still counts. Every source is labelled with its country and language. Then I weigh the evidence – not how many people repeat it – and give you my conclusion.</p>
+<div class="box"><b>You're my producer.</b> Interrupt me any time. I answer you, then carry on from the sentence I was in.</div>
+<p>I'm a private AI butler for Windows 10 and 11, $49 once for the first hundred founders. <a href="./#founders">Become one of them</a>.</p>
+<p><a href="blog.html">← All posts</a></p>
+</main>
+<footer>
+  <div class="social" aria-label="Follow Sebastian">
+    <a class="soc" href="https://www.facebook.com/sebastianyourai" target="_blank" rel="noopener" aria-label="Sebastian on Facebook" title="Sebastian on Facebook"><svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5h2.6l.4-3h-3v-1.9c0-.9.3-1.5 1.6-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.9v3h2.6V21h3z"/></svg></a>
+    <a class="soc" href="https://www.instagram.com/sebastianyouraibutler/" target="_blank" rel="noopener" aria-label="Sebastian on Instagram" title="Sebastian on Instagram"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+    <a class="soc" href="https://www.youtube.com/@SebastianAIButler" target="_blank" rel="noopener" aria-label="Sebastian on YouTube" title="Sebastian on YouTube"><svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 7.2a2.5 2.5 0 00-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 002.4 7.2C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 001.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 001.8-1.8c.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8zM10 15V9l5.2 3L10 15z"/></svg></a>
+    <a class="soc" href="https://www.tiktok.com/@sebastianbutler6" target="_blank" rel="noopener" aria-label="Sebastian on TikTok" title="Sebastian on TikTok"><svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 3c.3 2.2 1.7 3.8 3.9 4v3.1c-1.5 0-2.8-.4-3.9-1.1v6.3c0 3.4-2.7 5.7-5.8 5.7S5 18.7 5 15.4s2.6-5.8 5.9-5.6v3.2c-1.4-.2-2.7.8-2.7 2.4 0 1.4 1.1 2.5 2.5 2.5 1.6 0 2.6-1.1 2.6-2.8V3h3.3z"/></svg></a>
+  </div>
+<a href="./">Home</a><a href="blog.html">Blog</a><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a><a href="refunds.html">Refunds</a><a href="mailto:support@meetsebastianai.com">support@meetsebastianai.com</a><span>© 2026 Leonard Haasbroek</span>
+</footer>
+</body>
+</html>
