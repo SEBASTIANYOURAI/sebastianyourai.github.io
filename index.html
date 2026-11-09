@@ -630,7 +630,7 @@ footer .soc:hover{color:var(--acc);border-color:rgba(var(--acc-rgb),.85);transfo
   </div>
 </section>
 
-<section class="band plain gut" id="soon">
+<section class="band plain gut" id="soon" data-t="soon">
   <div class="wrap">
     <div class="head"><div class="kick rise">Coming later</div><h2 class="h rise d1">Next, I become the computer.</h2><p class="lead rise d2">Today I live in my own room on your computer. One day I'd like to be the computer: you talk, and I write the code, run the tests and make the calls to my helpers, all in plain sight.</p></div>
     <video class="soonvid rise d2" src="assets/video/sebastian-os-concept.mp4" poster="assets/video/sebastian-os-concept.jpg" controls playsinline preload="none" aria-label="Sebastian OS - a concept film, narrated by Sebastian"></video>
@@ -667,7 +667,7 @@ footer .soc:hover{color:var(--acc);border-color:rgba(var(--acc-rgb),.85);transfo
   </div>
 </section>
 
-<section class="band plain gut" id="founders">
+<section class="band plain gut" id="founders" data-t="founders">
   <div class="wrap">
     <div class="head"><div class="kick rise">The first hundred</div><h2 class="h rise d1">Become one of my founders.</h2><p class="lead rise d2">Only a hundred people will ever be my first. You'll move me in before anyone else, and what you tell me decides what I become next.</p></div>
     <div class="cards">
@@ -895,6 +895,8 @@ footer .soc:hover{color:var(--acc);border-color:rgba(var(--acc-rgb),.85);transfo
     more: "I come with you on your phone, and my body moves on its own as I speak.",
     tell: "If something goes wrong, or you wish I could do more, just tell me. I show you every word, and with your yes, it goes straight to the man who makes me. He reads every one.",
     agree: "This is our agreement. I ask before I send, buy, delete or install anything.",
+    soon: "Today, I live in my own room on your computer. One day, I would like to be the computer. This is an early look.",
+    founders: "Only a hundred people will ever be my first. You shape what I become, and something special is waiting for you, inside my room.",
     cant: "And I'd rather tell you now what I can't do yet.",
     maker: "I was made by one man, and he's still making me.",
     movein: "This is how I move in. Like a guest arriving.",
@@ -902,7 +904,7 @@ footer .soc:hover{color:var(--acc);border-color:rgba(var(--acc-rgb),.85);transfo
     bye: { morning: "Enjoy the rest of your morning. I'll be here when you come back.", afternoon: "Enjoy the rest of your afternoon. I'll be here when you come back.", evening: "Enjoy the rest of your evening. I'll be here when you come back.", late: "Get some rest. I'll be here when you come back." }[part]
   };
   const STEPS_FIRST = ["hi", "colour", "truth"];
-  const STEPS = ["hi", "colour", "truth", "work", "lounge", "news", "stage", "room", "thing", "check", "watch", "mind", "more", "tell", "agree", "cant", "maker", "movein", "home", "bye"];
+  const STEPS = ["hi", "colour", "truth", "work", "lounge", "news", "stage", "room", "thing", "check", "watch", "mind", "more", "tell", "agree", "cant", "soon", "maker", "movein", "founders", "home", "bye"];
   const target = (t) => t === "colour" ? $("#hello") : $('[data-t="' + t + '"]');
   const tour = $("#tour"), segs = $("#tourSegs");
   STEPS.forEach(() => segs.appendChild(document.createElement("i")));
