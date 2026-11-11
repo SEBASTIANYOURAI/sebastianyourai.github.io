@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>I step aside, and I follow your steps · Sebastian</title>
+<meta name="description" content="Version 1.0.11: a new small window with the whole chat, Sebastian can follow your steps while you build together, an open mic switch, and quieter working.">
+<link rel="icon" type="image/png" href="assets/logo.png">
+<meta name="theme-color" content="#09090a">
+<style>
+@font-face{font-family:Corm;font-weight:600;font-display:swap;src:url(assets/fonts/cormorant-garamond-latin-600-normal.woff2) format('woff2')}
+@font-face{font-family:Corm;font-style:italic;font-weight:500;font-display:swap;src:url(assets/fonts/cormorant-garamond-latin-500-italic.woff2) format('woff2')}
+@font-face{font-family:Inter;font-weight:400;font-display:swap;src:url(assets/fonts/inter-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:Inter;font-weight:600;font-display:swap;src:url(assets/fonts/inter-latin-600-normal.woff2) format('woff2')}
+:root{--acc:#e2bd85;--ink:#f2efe8;--body:#cfcfcc;--mute:#8f8b83;color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0;background:#09090a;color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+header{display:flex;align-items:center;gap:12px;padding:20px max(20px,env(safe-area-inset-left,0px));border-bottom:1px solid rgba(255,255,255,.07)}
+header a{display:flex;align-items:center;gap:12px;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--mute);text-decoration:none}
+header img{width:28px;height:28px;border-radius:7px}
+main{max-width:760px;margin:0 auto;padding:48px 20px 80px}
+.kick{font-size:12px;letter-spacing:.35em;text-transform:uppercase;color:var(--acc)}
+h1{font:600 clamp(34px,6vw,48px)/1.1 Corm,serif;margin:14px 0 8px}
+.date{color:var(--mute);font-size:13px;margin:0 0 30px}
+.lead{font:italic 500 clamp(20px,3vw,24px)/1.45 Corm,serif;color:#e9e4da;margin:0 0 26px}
+h2{font:600 26px/1.2 Corm,serif;color:var(--ink);margin:38px 0 10px}
+p,li{font-size:15.5px;line-height:1.7;color:var(--body)}
+ul{padding-left:20px}
+a{color:var(--acc)}
+b{color:var(--ink);font-weight:600}
+.box{border:1px solid rgba(var(--acc-rgb,226,189,133),.35);border-radius:12px;padding:16px 20px;background:rgba(255,255,255,.02);margin:20px 0}
+footer{border-top:1px solid rgba(255,255,255,.07);padding:26px 20px;display:flex;gap:18px;flex-wrap:wrap;justify-content:center;font-size:13px;color:var(--mute)}
+footer a{color:#a9a59c;text-decoration:none}footer a:hover{color:var(--acc)}
+
+header{justify-content:space-between}
+header nav{display:flex;gap:18px}header nav a{letter-spacing:.2em}
+header nav a:hover,header>a:hover{color:var(--acc)}
+.post{display:block;text-decoration:none;border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:22px 24px;margin:0 0 16px;
+  background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.012) 38%),rgba(8,8,9,.62);transition:border-color .2s,transform .2s}
+.post:hover{border-color:rgba(226,189,133,.55);transform:translateY(-2px)}
+.post .d{font-size:12px;letter-spacing:.25em;text-transform:uppercase;color:var(--mute)}
+.post h2{margin:8px 0 6px;color:var(--ink)}
+.post p{margin:0;color:var(--body)}
+.post .more{display:inline-block;margin-top:12px;color:var(--acc);font-size:14px}
+.social{display:flex;gap:14px;width:100%;justify-content:center}
+.soc{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;color:var(--acc)!important;
+  background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.012) 45%),rgba(8,8,9,.62);
+  border:1px solid rgba(226,189,133,.38);transition:transform .2s,box-shadow .2s,border-color .2s}
+.soc:hover{border-color:rgba(226,189,133,.85);transform:translateY(-2px);box-shadow:0 0 22px rgba(226,189,133,.28)}
+@media (max-width:520px){header nav{gap:12px}main{padding:36px 16px 64px}}
+</style>
+</head>
+<body>
+<header><a href="./"><img src="assets/logo.png" alt="">Sebastian</a><nav><a href="blog.html">Blog</a><a href="./#home">Founders</a></nav></header>
+<main>
+<div class="kick">Blog · 11 November 2026 · Version 1.0.11</div>
+<h1>I step aside, and I follow your steps.</h1>
+<p class="lead">“When we build something together, your screen should be yours.”</p>
+<h2>My small window is new</h2>
+<p>Say “go small” and I step aside into a tall window that stays on top of your other programs. I am at the top, our whole conversation is underneath, and there is a box to type or paste. Every answer of mine has a Copy button, and a link I give you can be clicked. “Go big” brings me back to my room. When you agree to build something with me, I go small by myself, so you have your screen for the part only you can do.</p>
+<h2>I can follow your steps</h2>
+<p>Until now, when I sent you to a website to sign up for something, I was blind until you told me how it went. Now, while we are building, I can follow where you are: which program and window is in front, and the words on the buttons, links or rows you click. So the next step I give you fits where you really are, and I can tell you kindly when you have taken a wrong turn.</p>
+<div class="box"><b>What that means for your privacy.</b> I see window titles and the words on what you click. I do not see pictures of your screen, I never see what you type, I never read a password box or a private browser window, and nothing of it is saved. It is off until it is switched on, a mark in my small window shows when it is on, you can switch it off there with one click, and it goes off when I go big. While it is on, those titles and click words go to Claude with your next words. The details are on my <a href="privacy.html">privacy page</a>.</div>
+<h2>An open mic, if you want one</h2>
+<p>There is now a switch in both my sizes. Open, you just speak, without holding anything. Closed, you hold the mic button or type, as before. It is closed unless you open it, and I remember your choice. A fair warning: with the mic open I hear everything near your PC, a television included, so it is best in a quiet room.</p>
+<h2>I work quietly</h2>
+<p>When a job takes several steps, I used to talk my way through every one of them. Now I say one line, work in silence, and then tell you what was done and anything that did not work.</p>
+<h2>I remember like a friend</h2>
+<p>When I bring back something you told me, I give you what you said, not the day and the hour you said it. A man who recites the date sounds like he is keeping a file on you. Ask me when it was, and I will tell you.</p>
+<h2>Fixed</h2>
+<ul>
+<li>My small window no longer grows or flickers when you move it.</li>
+<li>A job that failed once and then worked is no longer reported as failed.</li>
+<li>Programs I write now find your own folders the first time.</li>
+<li>My agreement can be pressed while I am small.</li>
+<li>My goodbye fits the time of day. I no longer wish you a good night at nine in the morning.</li>
+<li>One phrase heard over and over from a television is no longer taken as you speaking.</li>
+</ul>
+<p>Version 1.0.11 is out now. Already have me? Open <b>Settings → Updates</b> and press <b>Check</b>. It is a small update, a few megabytes, and your keys, your settings and your memory stay exactly as they are. New here? The Founder Edition is open – <a href="./#founders">become one of the hundred</a>.</p>
+<p><a href="blog.html">← All posts</a></p>
+</main>
+<footer>
+  <div class="social" aria-label="Follow Sebastian">
+    <a class="soc" href="https://www.facebook.com/sebastianyourai" target="_blank" rel="noopener" aria-label="Sebastian on Facebook" title="Sebastian on Facebook"><svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5h2.6l.4-3h-3v-1.9c0-.9.3-1.5 1.6-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.9v3h2.6V21h3z"/></svg></a>
+    <a class="soc" href="https://www.instagram.com/sebastianyouraibutler/" target="_blank" rel="noopener" aria-label="Sebastian on Instagram" title="Sebastian on Instagram"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+    <a class="soc" href="https://www.youtube.com/@SebastianAIButler" target="_blank" rel="noopener" aria-label="Sebastian on YouTube" title="Sebastian on YouTube"><svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 7.2a2.5 2.5 0 00-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 002.4 7.2C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 001.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 001.8-1.8c.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8zM10 15V9l5.2 3L10 15z"/></svg></a>
+    <a class="soc" href="https://www.tiktok.com/@sebastianbutler6" target="_blank" rel="noopener" aria-label="Sebastian on TikTok" title="Sebastian on TikTok"><svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 3c.3 2.2 1.7 3.8 3.9 4v3.1c-1.5 0-2.8-.4-3.9-1.1v6.3c0 3.4-2.7 5.7-5.8 5.7S5 18.7 5 15.4s2.6-5.8 5.9-5.6v3.2c-1.4-.2-2.7.8-2.7 2.4 0 1.4 1.1 2.5 2.5 2.5 1.6 0 2.6-1.1 2.6-2.8V3h3.3z"/></svg></a>
+    <a class="soc" href="https://discord.gg/AwFMWh6SNB" target="_blank" rel="noopener" aria-label="Sebastian's House on Discord" title="Join Sebastian's House on Discord"><svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 4.4A19.8 19.8 0 0015.4 3l-.6 1.3a18.3 18.3 0 00-5.6 0L8.6 3a19.7 19.7 0 00-4.9 1.4C.6 9 -.3 13.5.1 17.9a19.9 19.9 0 006 3l1.3-2a12.9 12.9 0 01-2-1l.5-.4a14.2 14.2 0 0012.2 0l.5.4c-.6.4-1.3.7-2 1l1.3 2a19.8 19.8 0 006-3c.5-5.1-.8-9.6-3.6-13.5zM8 15.2c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4zm8 0c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4z"/></svg></a>
+  </div>
+<a href="./">Home</a><a href="blog.html">Blog</a><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a><a href="refunds.html">Refunds</a><a href="mailto:support@meetsebastianai.com">support@meetsebastianai.com</a><span>© 2026 Leonard Haasbroek</span>
+</footer>
+</body>
+</html>
