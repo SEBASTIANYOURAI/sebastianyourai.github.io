@@ -37,7 +37,7 @@ footer a{color:#a9a59c;text-decoration:none}footer a:hover{color:var(--acc)}
 <main>
 <div class="kick">Privacy</div>
 <h1>What I keep, and what leaves your PC.</h1>
-<p class="date">Last updated 11 November 2026</p>
+<p class="date">Last updated 11 November 2026 (version 1.0.12)</p>
 <p class="lead">“My memory of us lives on your PC, not on anyone's server.” Here is exactly what that means.</p>
 <p>Sebastian is made and sold by Leonard Haasbroek, Fargo, North Dakota, USA. Questions about privacy: <a href="mailto:support@meetsebastianai.com">support@meetsebastianai.com</a>.</p>
 
@@ -55,7 +55,12 @@ footer a{color:#a9a59c;text-decoration:none}footer a:hover{color:var(--acc)}
 <li><b>Updates.</b> He checks GitHub for new signed versions of himself. GitHub sees your internet address, as with any download.</li>
 <li><b>Your founder key.</b> When Sebastian is installed, and at most once a day after that, he checks your key with Polar, our shop. He sends the key, a random activation number, and a one-way fingerprint of your PC that can't be turned back into anything about you. No PC name, no files, no conversations.</li>
 <li><b>Feedback and fault reports.</b> If something breaks, or you'd like him to do something new, he can write a short report and send it to us at support@meetsebastianai.com. He shows you every word first, and it only goes if you say yes. It holds only those words, his version number and your Windows version: no files, no memories, no keys. From version 1.0.8 it goes straight to us through our own small Cloudflare forwarder, which emails it to our support inbox and keeps nothing; like any web service, Cloudflare sees your internet address as it passes through. In earlier versions, if the forwarder can't be reached, and always in Tor mode, it opens in your own email program instead, for you to send.</li>
-<li><b>Camera.</b> This version of Sebastian doesn't use your camera at all. Pictures and screenshots are never sent to a cloud brain.</li>
+<li><b>Your phone (from version 1.0.12).</b> Sebastian can send a short message to the phone you paired with him, and you can answer from it. There is no AI key on the phone: it talks to your own PC, and your PC does the thinking. When you are away from home, the phone reaches your PC through Tailscale, a private tunnel you set up yourself; Tailscale sees that the two devices are connected, not what is said. A notification travels, encrypted, through your phone maker's notification service (Apple or Google) to reach you. The messages are kept on your PC.</li>
+<li><b>Keeping watch (from version 1.0.12).</b> If you ask Sebastian to keep an eye on something, he checks his own live notes on your PC. When something new fits, those lines and what you asked him to watch go to Claude so he can judge whether it is worth telling you, and he tells you once. If you are in the middle of a conversation, or away, it goes to your phone. Nothing is watched unless you asked.</li>
+<li><b>What he owes you (from version 1.0.12).</b> When Sebastian takes something on for later, he keeps a record on your PC: your words, what he owes and by when. Like the rest of his notes, it goes to Claude with your conversation so that he can act on it.</li>
+<li><b>Building for you (from version 1.0.12).</b> When you ask Sebastian to build a program or a website, he hands the job to a quiet builder, which is Claude too, on your own key. The description of the job and the files being built go to Claude. The files are written to your Documents\Sebastian folder and nowhere else. There is a switch in Settings, <b>Strong builder</b>, which is off until you turn it on: when it is on, a hard build may go to Claude Opus, which costs more on your key.</li>
+<li><b>Pictures and your screen (from version 1.0.12).</b> There is a switch in Settings, <b>Pictures to Claude</b>, and it is off until you turn it on. While it is off, no picture or screenshot leaves your PC. While it is on, a picture goes to Claude in two cases only: when you ask Sebastian to look at your screen or at a picture, and when his builder checks a page it has just built for you. He does not look by himself. Turn the switch off and it stops at once. You decide this, not Sebastian.</li>
+<li><b>Camera.</b> This version of Sebastian doesn't use your camera at all.</li>
 </ul>
 
 <h2>When you buy</h2>
