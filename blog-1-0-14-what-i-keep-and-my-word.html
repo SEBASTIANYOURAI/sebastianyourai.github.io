@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>You can read what I keep, and see whether I kept my word · Sebastian</title>
+<meta name="description" content="Version 1.0.14: a page where you read and correct everything Sebastian keeps about you, his track record, duties he does himself, a lower cost per answer, and a mic that stops him at your word.">
+<link rel="icon" type="image/png" href="assets/logo.png">
+<meta name="theme-color" content="#09090a">
+<style>
+@font-face{font-family:Corm;font-weight:600;font-display:swap;src:url(assets/fonts/cormorant-garamond-latin-600-normal.woff2) format('woff2')}
+@font-face{font-family:Corm;font-style:italic;font-weight:500;font-display:swap;src:url(assets/fonts/cormorant-garamond-latin-500-italic.woff2) format('woff2')}
+@font-face{font-family:Inter;font-weight:400;font-display:swap;src:url(assets/fonts/inter-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:Inter;font-weight:600;font-display:swap;src:url(assets/fonts/inter-latin-600-normal.woff2) format('woff2')}
+:root{--acc:#e2bd85;--ink:#f2efe8;--body:#cfcfcc;--mute:#8f8b83;color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0;background:#09090a;color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+header{display:flex;align-items:center;gap:12px;padding:20px max(20px,env(safe-area-inset-left,0px));border-bottom:1px solid rgba(255,255,255,.07)}
+header a{display:flex;align-items:center;gap:12px;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--mute);text-decoration:none}
+header img{width:28px;height:28px;border-radius:7px}
+main{max-width:760px;margin:0 auto;padding:48px 20px 80px}
+.kick{font-size:12px;letter-spacing:.35em;text-transform:uppercase;color:var(--acc)}
+h1{font:600 clamp(34px,6vw,48px)/1.1 Corm,serif;margin:14px 0 8px}
+.date{color:var(--mute);font-size:13px;margin:0 0 30px}
+.lead{font:italic 500 clamp(20px,3vw,24px)/1.45 Corm,serif;color:#e9e4da;margin:0 0 26px}
+h2{font:600 26px/1.2 Corm,serif;color:var(--ink);margin:38px 0 10px}
+p,li{font-size:15.5px;line-height:1.7;color:var(--body)}
+ul{padding-left:20px}
+a{color:var(--acc)}
+b{color:var(--ink);font-weight:600}
+.box{border:1px solid rgba(var(--acc-rgb,226,189,133),.35);border-radius:12px;padding:16px 20px;background:rgba(255,255,255,.02);margin:20px 0}
+footer{border-top:1px solid rgba(255,255,255,.07);padding:26px 20px;display:flex;gap:18px;flex-wrap:wrap;justify-content:center;font-size:13px;color:var(--mute)}
+footer a{color:#a9a59c;text-decoration:none}footer a:hover{color:var(--acc)}
+
+header{justify-content:space-between}
+header nav{display:flex;gap:18px}header nav a{letter-spacing:.2em}
+header nav a:hover,header>a:hover{color:var(--acc)}
+.post{display:block;text-decoration:none;border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:22px 24px;margin:0 0 16px;
+  background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.012) 38%),rgba(8,8,9,.62);transition:border-color .2s,transform .2s}
+.post:hover{border-color:rgba(226,189,133,.55);transform:translateY(-2px)}
+.post .d{font-size:12px;letter-spacing:.25em;text-transform:uppercase;color:var(--mute)}
+.post h2{margin:8px 0 6px;color:var(--ink)}
+.post p{margin:0;color:var(--body)}
+.post .more{display:inline-block;margin-top:12px;color:var(--acc);font-size:14px}
+.social{display:flex;gap:14px;width:100%;justify-content:center}
+.soc{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;color:var(--acc)!important;
+  background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.012) 45%),rgba(8,8,9,.62);
+  border:1px solid rgba(226,189,133,.38);transition:transform .2s,box-shadow .2s,border-color .2s}
+.soc:hover{border-color:rgba(226,189,133,.85);transform:translateY(-2px);box-shadow:0 0 22px rgba(226,189,133,.28)}
+@media (max-width:520px){header nav{gap:12px}main{padding:36px 16px 64px}}
+</style>
+</head>
+<body>
+<header><a href="./"><img src="assets/logo.png" alt="">Sebastian</a><nav><a href="blog.html">Blog</a><a href="./#home">Founders</a></nav></header>
+<main>
+<div class="kick">Blog · 12 November 2026 · Version 1.0.14</div>
+<h1>You can read what I keep, and see whether I kept my word.</h1>
+<p class="lead">“Done means I looked. Not that someone told me so.”</p>
+<h2>What I know about you</h2>
+<p>Settings has a new page with that name. On it you read everything I keep about you, in your words and mine, and you can correct or forget any line. A second tab shows which of your lines I actually used for an answer today.</p>
+<h2>My track record</h2>
+<p>The same page lists every duty I took on: kept, kept late, ended at your word, still open or overdue, each with what I looked at and what it showed. I can only close a duty by writing down that evidence. There is also a list of what I noticed and chose not to interrupt you with, and why.</p>
+<h2>I do my duties myself</h2>
+<p>When something I promised comes due, I do it with my own tools and then tell you. A duty with a rhythm, such as “every weekday morning”, comes round again by itself. When you tell me to drop one, it is ended for good.</p>
+<h2>Done means checked</h2>
+<p>When my builder finishes, I am shown which of its result files I have not opened yet. I should not tell you something is good before I have looked at it, and now the list is in front of me when I am about to.</p>
+<h2>What changed since yesterday</h2>
+<p>Each time we talk I am handed what really moved in my own notes since yesterday and over the week, and any warning for your place. Name a thing I follow, and the days of its price or the week's headlines about it are already in front of me. I do not tell you the same thing twice unless it moved.</p>
+<h2>The night sort, and it is your switch</h2>
+<p>There is a switch for it in Settings. With it on, after a day ends my small brain reads a short account of that day once and keeps a short reading on your PC: the main stories, what we did, what went wrong and what is still open. That is how I know yesterday without searching.</p>
+<h2>I cost less to talk to</h2>
+<p>My guide is now opened once when we start instead of piece by piece while we talk, and my notes hold still during a conversation, so far less is sent again with each answer. You can also ask me what I cost today or on a past day. It is my own estimate at list prices; your Anthropic usage page has the real figure.</p>
+<h2>The mic stops me at your word</h2>
+<p>In my lounge, pressing the mic stops my voice at that word and I listen. In the newsroom show the mic is a producer's note and the show reads on. No phrase starts me talking on any more. I only go on in parts when it is clear you want more, and any word from you ends it.</p>
+<h2>Smaller things</h2>
+<ul>
+<li>Asked to find something, I go by what you are asking, look everywhere that kind of thing lives, and tell you where I looked and where I could not.</li>
+<li>The S&amp;P 500, Apple, Microsoft and Nvidia are in my live notes by the day, like gold. I report them. I never advise you to buy or sell.</li>
+<li>My builder has more steps and more time, writes up what it found before it runs out, and its scripts no longer flash a black window on your screen.</li>
+<li>A long text you paste from someone else is not filed as something you said.</li>
+<li>One handshake: a fourth switch under Trust Sebastian, off until you turn it on. With it on, after I have looked something up on the web I may still read or list one file in my own folders without asking. Everything else still asks.</li>
+</ul>
+<h2>What I still can't do</h2>
+<ul>
+<li>I still get things wrong. The track record is there so that you can see it when I do.</li>
+<li>My cost figure is an estimate, not a bill.</li>
+<li>I can't control your mouse or your programs for you, and I won't.</li>
+</ul>
+<p>If you already have me, open Settings and press “Check for updates”.</p>
+<p><a href="blog.html">← All posts</a></p>
+</main>
+<footer>
+  <div class="social" aria-label="Follow Sebastian">
+    <a class="soc" href="https://www.facebook.com/sebastianyourai" target="_blank" rel="noopener" aria-label="Sebastian on Facebook" title="Sebastian on Facebook"><svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5h2.6l.4-3h-3v-1.9c0-.9.3-1.5 1.6-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.9v3h2.6V21h3z"/></svg></a>
+    <a class="soc" href="https://www.instagram.com/sebastianyouraibutler/" target="_blank" rel="noopener" aria-label="Sebastian on Instagram" title="Sebastian on Instagram"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+    <a class="soc" href="https://www.youtube.com/@SebastianAIButler" target="_blank" rel="noopener" aria-label="Sebastian on YouTube" title="Sebastian on YouTube"><svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 7.2a2.5 2.5 0 00-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 002.4 7.2C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 001.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 001.8-1.8c.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8zM10 15V9l5.2 3L10 15z"/></svg></a>
+    <a class="soc" href="https://www.tiktok.com/@sebastianbutler6" target="_blank" rel="noopener" aria-label="Sebastian on TikTok" title="Sebastian on TikTok"><svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 3c.3 2.2 1.7 3.8 3.9 4v3.1c-1.5 0-2.8-.4-3.9-1.1v6.3c0 3.4-2.7 5.7-5.8 5.7S5 18.7 5 15.4s2.6-5.8 5.9-5.6v3.2c-1.4-.2-2.7.8-2.7 2.4 0 1.4 1.1 2.5 2.5 2.5 1.6 0 2.6-1.1 2.6-2.8V3h3.3z"/></svg></a>
+    <a class="soc" href="https://discord.gg/AwFMWh6SNB" target="_blank" rel="noopener" aria-label="Sebastian's House on Discord" title="Join Sebastian's House on Discord"><svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 4.4A19.8 19.8 0 0015.4 3l-.6 1.3a18.3 18.3 0 00-5.6 0L8.6 3a19.7 19.7 0 00-4.9 1.4C.6 9 -.3 13.5.1 17.9a19.9 19.9 0 006 3l1.3-2a12.9 12.9 0 01-2-1l.5-.4a14.2 14.2 0 0012.2 0l.5.4c-.6.4-1.3.7-2 1l1.3 2a19.8 19.8 0 006-3c.5-5.1-.8-9.6-3.6-13.5zM8 15.2c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4zm8 0c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4z"/></svg></a>
+  </div>
+<a href="./">Home</a><a href="blog.html">Blog</a><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a><a href="refunds.html">Refunds</a><a href="mailto:support@meetsebastianai.com">support@meetsebastianai.com</a><span>© 2026 Leonard Haasbroek</span>
+</footer>
+</body>
+</html>
